@@ -1,0 +1,226 @@
+% El siguiente paquete permite colocar etiquetas
+% de informacion para que los usuarios sepan
+% que deben ingresar en cada campo
+
+\RequirePackage[document]{ragged2e}
+\RequirePackage{color}
+\RequirePackage{soul}
+\RequirePackage{xstring}
+\RequirePackage{xifthen}
+\RequirePackage{anteproyectoTesis}
+\RequirePackage{enumitem}
+\ProvidesPackage{anteproyectoIndicaciones}[2023/07/08]
+
+
+\DeclareOption*{\PackageWarning{anteproyectoIndicaciones}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% comandos para mostrar mensajes en los
+% campos correspondientes
+
+\newcommand{\msgTema}{
+ \hl{Escriba el tema de su trabajo de titulación.}
+}
+
+\newcommand{\msgLineaInvestigacion}{
+ \hl{Escriba la línea identificada para su trabajo de titulación.}
+}
+
+\newcommand{\msgSublineaInvestigacion}{
+ \hl{Escriba la sublínea identificada para su trabajo de titulación.}
+}
+
+\newcommand{\msgEntidadAuspiciante}{
+ \hl{Escriba que institución auspiciará el trabajo de titulación.}
+}
+
+\newcommand{\msgDirectorTesis}{\hl{Nombre y Apellido del Director/a}}
+
+\newcommand{\msgAsesorTesis}{\hl{Nombre y Apellido del Asesor/a}}
+\newcommand{\msgPertinenciaTesis}{
+ \hl{Es parte del proyecto de investigación: “Nombre del Proyecto”, de autoría del MSc. AAAA XXX o en su caso si soluciona una problemática de la Institución requirente.}
+}
+
+\newcommand{\msgAutorNombres}{
+ \hl{Escriba sus apellidos y sus nombres.}
+}
+
+\newcommand{\msgAutorDireccion}{
+ \hl{Escriba su dirección de domicilio.}
+}
+
+
+\newcommand{\mgsNombreCarrera}{
+ \hl{NOMBRE DE LA CARRERA}
+}
+\newcommand{\msgAutorTelefono}{
+ \hl{Escriba su teléfono fijo}
+}
+\newcommand{\msgAutorCorreo}{
+ \hl{Escriba su correo electrónico.}
+}
+\newcommand{\msgTelfMovil}{
+ \hl{Teléfono móvil}
+}
+
+\newcommand{\msgLugarTrabajo}{
+ \hl{Escriba su lugar de trabajo en caso de tenerlo.}
+}
+
+\newcommand{\msgtelefonoTrabajo}{
+ \hl{Escriba el teléfono de su trabajo en caso de tenerlo.}
+}
+
+\newcommand{\msgDireccionTrabajo}{
+ \hl{Escriba la dirección de su trabajo en caso de tenerlo.}
+}
+
+
+
+\newcommand{\msgDuracionTesis}{
+ \hl{Escriba la duración de su trabajo de titulación en meses.}
+}
+
+
+\newcommand{\msgInvestigacionTesis}{
+ \hl{Marque con una X según el tipo de investigación de su trabajo de titulación.}
+}
+
+\newcommand{\msgTituloInvestigacion}{
+ \hl{Título de la investigación  }
+}
+
+\newcommand{\msgContextoLocal}{
+ \textbf{Contexto: }Local
+}
+
+\newcommand{\msgContextoNacional}{
+ \textbf{Contexto: }Nacional
+}
+
+\newcommand{\msgContextoInternacional}{
+ \textbf{Contexto: }Internacional
+}
+
+\newcommand{\msgTituloEnlace}{
+ \hl{Coloque la url o enlace de la investigación  }
+}
+
+\newcommand{\msgTituloAporte}{
+ \hl{Explique de manera breve cual es su aporte en comparación con la investigación }
+}
+
+
+
+\newcommand{\msgPresupuestoTesis}{
+ \hl{Escriba el presupuesto de su trabajo de titulación en dólares \$.}
+}
+
+
+\newcommand{\msgPropuestoPor}{
+ \hl{Escriba el nombre o nombres de los autores que propusieron el tema de su trabajo de titulación.}
+}
+
+\newcommand{\msgAreasTecnicas}{
+ \hl{Enumere por lo menos 2 áreas técnicas aplicadas en su trabajo de titulación.
+}
+}
+
+\newcommand{\msgDirectorSugerido}{
+ \hl{Escriba el nombre director sugerido para su trabajo de titulación.}
+}
+
+\newcommand{\msgFechaRevision}{
+ \hl{Escriba la fecha en la se va enviar su anteproyecto de trabajo de titulación.}
+}
+
+\newcommand{\msgProblema}{
+\hl{
+La redacción del planteamiento del problema debería responder a la pregunta ¿Qué está pasando? Así mismo, se deben describir las causas que originan el problema y las consecuencias que éste genera. Se deben considerar las variables que intervienen en el proceso. Finalmente, indicar la manera como se abordará el problema desde el campo de la ingeniería. En la figura 1 se muestra un esquema general del contenido de la sección.  
+
+}
+}
+
+\newcommand{\msgObjetivos}{
+\hl{3.1	Objetivo General: Describa en una frase, que es lo pretende conseguir con el Proyecto. Podrá contener además la naturaleza del equipo, sistema, instalación o construcción que se va a proyectar, utilice un verbo como inicio para plasmar la idea. \\
+
+3.2	Objetivos Específicos: Describa un mínimo de dos y un máximo de cuatro objetivos específicos, detalle con precisión que estrategias y/o acciones se pretende realizar para cumplir el objetivo general, utilice verbos en infinitivo.
+
+}
+}
+
+
+\newcommand{\msgObjGeneral}{
+\hl{Describa en una frase, que es lo pretende conseguir con el Proyecto. Podrá contener además la naturaleza del equipo, sistema, instalación o construcción que se va a proyectar, utilice un verbo como inicio para plasmar la idea. \\}}
+
+\newcommand{\msgObjEspecificos}{
+\hl{Describa un mínimo de dos y un máximo de cuatro objetivos específicos, detalle con precisión que estrategias y/o acciones se pretende realizar para cumplir el objetivo general, utilice verbos en infinitivo.}}
+
+\newcommand{\msgAlcance}{
+\hl{Describa los límites en los que se enmarca el Trabajo de Titulación, y entre los que es válido. Delimitar además la profundidad del trabajo. El alcance debe tener relación con el objetivo, debe detallar y permitir su cuantificación. Lo que el estudiante pretende alcanzar mediante su investigación de grado.
+
+}
+}
+
+
+\newcommand{\msgMetodologia}{
+\hl{Describa el cómo solucionar el problema más crítico identificado en el hallazgo, que acciones, estrategias o métodos, se plantea utilizar para lograr cumplir los hitos con relación a los objetivos propuestos. 
+Puede considerar los tipos de investigación, métodos,teorías.
+\\}
+}
+
+\newcommand{\msgBibliografia}{
+\hl{
+Aplique la bibliografía consultada en formato APA última edición; Deberá tener al menos 15 o más bibliografías entre libros y publicaciones de impacto, utilice un gestor bibliográfico y las bases de datos bibliográficas que la UTN dispone como servicio.
+}
+}
+
+\newcommand{\msgJustificacion}{
+\hl{En esta sección deben señalarse las razones por las cuales se realiza la investigación y sus posibles aportes desde el punto de vista teórico o práctico. Para su redacción se recomienda incluir los siguientes aspectos:
+•	¿Por qué realizar la investigación? Porque se desconoce lo que ocasiona la disminución en las ventas y de continuar esta situación se obtendrán cada vez menos ingresos, lo que a futuro impedirá cubrir los costos operativos de la empresa.
+•	¿Para qué se hace la investigación? Para tomar decisiones e implantar correctivos con base en las causas que se identifiquen.
+•	Relevancia científica, social y contemporánea. 
+•	Importancia del estudio y posibles aportes teóricos o prácticos. 
+•	Probables beneficiarios con los resultados (directos e indirectos). 
+}
+
+}
+
+
+\newcommand{\msgContexto}{
+\hl{Esta sección tiene como propósito reportar los estudios previos y/o trabajos de investigación relacionados con el problema, analizando la información existente en las bases de datos científicas que han abordado el tema de interés de manera directa o indirecta. De modo general, el modelo de redacción debe responder a las siguientes preguntas: ¿Qué se hizo?, ¿Cómo se hizo?, ¿Qué resultados se obtuvieron? 
+Por tratarse de un trabajo en el ámbito tecnológico se recomienda reportar antecedentes recientes (últimos 5 años), garantizando contar con conocimiento necesario más actualizado que existe para resolver el problema planteado. Es indispensable citar a los autores. Para las citas se utilizará la Norma IEEE. \\
+
+Debe colocar por lo menos 5 antecentes.
+
+}
+}
+
+\newcommand{\msgCedula}{
+Cédula
+}
+\newcommand{\msgNombres}{\hl{Nombre y Apellido}}
+\newcommand{\msgNombresApellidos}{
+\hl{Nombre y Apellido}
+}
+
+\newcommand{\msgCedulaIdentidad}{
+\hl{Cédula de Identidad}
+}
+
+\newcommand{\msgTituloGrado}{
+\hl{titulo por el que opta}
+}
+
+% campo para verificar si el campo ha sido completado
+% si no está completado se muestra la etiqueta resaltada
+% de color amarillo mostrando al usuario que debe ingresar
+\newcommand{\RevisarCampo}[2]{
+\StrLen{#1}[\mystringlen]
+\ifthenelse{\mystringlen > 0}{#1}{#2}
+}
+
+
+
+
+

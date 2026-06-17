@@ -1,0 +1,8 @@
+En está carpeta deberá subir las imagenes de las firmas de su asessor y director.
+Por favor siga las siguientes instruccciones:
+
+1) Borre las imagenes firmaAsesor.png y firmaDirector que se encuentran como ejemplos.
+
+2) Suba las imagen de las firma  con los nombres firmaAsesor y firmaDirector en formato png.
+
+3) Presione nuevamente el botón recompilar.

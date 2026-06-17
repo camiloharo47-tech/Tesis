@@ -1,0 +1,779 @@
+%  El siguiente archivo contiene los macros que fueron creadaas para
+%  realizar este paquete para la elaboración del anteproyecto de grado
+%  se recomienda no modificar este archivo pero en caso de ser 
+%  necesario puede hacerlo.
+
+\RequirePackage[document]{ragged2e}
+\RequirePackage{anteproyectoIndicaciones}
+\RequirePackage{color}
+\RequirePackage{soul}
+\RequirePackage{xstring}
+\RequirePackage{xifthen}
+\RequirePackage{enumitem}
+\RequirePackage{anteproyectoTesis}
+\RequirePackage{tesisIndicaciones}
+\RequirePackage{ifthen}
+\RequirePackage{pdfpages}
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage{caption}
+\RequirePackage{tocloft}
+\ProvidesPackage{tesisFICA}[2023/10/26]
+
+
+\DeclareOption*{\PackageWarning{tesisFICA}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+
+\titleformat{\chapter}[display]
+{\normalfont\fontsize{16}{20}\selectfont\bfseries}
+{}
+{22pt}
+{\fontsize{16}{20}\selectfont\large}
+
+\titlespacing*{\chapter}{6cm}{-2cm}{1cm}
+
+% Modificar el estilo de las secciones
+\titleformat{\section}
+  {\fontsize{12}{14}\selectfont\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+% Modificar el estilo de las subsecciones
+\titleformat{\subsection}
+  {\fontsize{12}{14}\selectfont\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+
+% Modificar el estilo de las subsubsecciones
+\titleformat{\subsubsection}
+  {\fontsize{12}{14}\selectfont\bfseries}
+  {\thesubsubsection}
+  {1em}
+  {} 
+
+% Cambiar el estilo de los capitulos de la tabla de contenidos
+\titlecontents{chapter}
+  [1.5em]{\vspace{1ex}}
+  {}{}{}
+
+% Cambiar el estilo de las subsecciones de la tabla de contenidos
+
+
+\titlecontents{subsection}
+  [0.70cm]  % Ajusta el espacio izquierdo
+  {\vspace{5pt}} % Espacio antes de la entrada
+  {\thecontentslabel\hspace{1em}}{} % Espacio antes de la etiqueta
+  {\titlerule*[0.5pc]{.}\contentspage} % Formato del título y número de página
+% Cambiar el estilo de las subsubsecciones de la tabla de contenidos
+\titlecontents{subsubsection}
+  [0.70cm]  % Ajusta el espacio izquierdo
+  {\vspace{5pt}} % Espacio antes de la entrada
+  {\thecontentslabel\hspace{1em}} % Formato de la etiqueta
+  {} % Espacio antes de la etiqueta
+  {\titlerule*[0.5pc]{.}\contentspage\normalfont} % Formato del título y número de página
+
+% Cambiar el nombre de la lista de figuras
+\addto\captionsspanish{\renewcommand{\listfigurename}{
+ÍNDICE DE FIGURAS
+}}
+
+% Cambiar el nombre de la lista de tablas 
+\addto\captionsspanish{\renewcommand{\listtablename}{
+ÍNDICE DE TABLAS
+}}
+
+% Cambiar las etiquetas de las listas de figuras y de tablas
+\renewcommand{\cftfigfont}{Figura }
+\renewcommand{\cfttabfont}{Tabla }
+\captionsetup[table]{name=Tabla}
+
+\renewcommand\cftloftitlefont{\normalsize\bfseries}
+\renewcommand\cftlottitlefont{\normalsize\bfseries}
+
+
+\renewcommand{\cftloftitlefont}{\hfill\normalsize\bfseries\centering} 
+\renewcommand{\cftafterloftitle}{\hfill}
+
+\renewcommand{\cftlottitlefont}{\hfill\normalsize\bfseries\centering} 
+\renewcommand{\cftafterlottitle}{\hfill}
+
+
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% Cambiar el color del pie de página
+\makeatletter 
+\patchcmd{\ps@plain}{\thepage}{\textcolor{white}{\thepage}}{}{}
+\makeatother
+
+% Comando para la página de portada
+\newcommand{\Portada}{
+\begin{center}
+
+\begin{center}
+    \includegraphics[width=0.40\linewidth]{UTILES/Imagenes/nuevologo.png}
+\end{center}
+\vspace{1cm}
+    {\fontsize{18}{21}\selectfont {\textbf{ 
+UNIVERSIDAD TÉCNICA DEL NORTE
+} }} \\
+\vspace{0.25cm}
+ {\fontsize{16}{19}\selectfont {
+FACULTAD DE INGENIERÍA EN CIENCIAS APLICADAS
+ }}
+\\
+\vspace{0.25cm}
+{\fontsize{14}{16}\selectfont {\textbf{ 
+\RevisarCampoCarrera
+} }}
+\\
+\vspace{1.5cm}
+ {\fontsize{12}{12}\selectfont{
+TRABAJO DE INTEGRACIÓN CURRICULAR PREVIO A LA OBTENCIÓN DEL TÍTULO DE \hspace{-0.1cm}\titulocarrera 
+ }}
+\\
+\vspace{1cm}
+{\fontsize{14}{16}\selectfont {\textbf{ 
+"\titulotesis" 
+} }}
+\\
+\begin{center}
+ \includegraphics[width=0.6\linewidth]{UTILES/Imagenes/fica.jpg}
+\end{center}
+\vspace{0.5cm}
+ {\fontsize{12}{12}\selectfont {
+\textbf{AUTOR: } \nombres 
+}}
+ \\
+ {\fontsize{12}{12}\selectfont {
+\hspace{-1cm}\textbf{DIRECTOR: } \director
+}}
+\vspace{0.25cm}
+\\
+Ibarra – Ecuador 
+\\
+
+\textbf{\the\year}
+
+\end{center}
+
+}
+
+\newcommand{\CampoCarrera}{
+\ifthenelse{\equal{\numcarrera}{0}}{
+\msgCarrera
+}{Carrera de \hspace{-0.2cm}\carreralinea}
+}
+
+
+\newcommand{\Resumen}[1]{
+\StrLen{#1}[\palabrasresumen]
+
+\ifthenelse{\palabrasresumen < 250}{
+\def\resumen{
+\msgResumen{\palabrasresumen}
+}
+}{}
+
+\ifthenelse{\palabrasresumen > 250}{
+\def\resumen{
+\msgResumen{\palabrasresumen}
+}
+}{}
+
+\ifthenelse{\palabrasresumen > 1600 \and \palabrasresumen < 1685}{
+\def\resumen{
+#1
+}
+}{}
+}
+\newcommand{\Abstract}[1]{
+\StrLen{#1}[\palabrasabstract]
+
+\ifthenelse{\palabrasabstract < 250}{
+\def\abstract{
+\msgResumen{\palabrasabstract}
+}
+}{}
+
+\ifthenelse{\palabrasabstract > 250}{
+\def\abstract{
+\msgResumen{\palabrasabstract}
+}
+}{}
+
+\ifthenelse{\palabrasabstract > 1600 \and \palabrasabstract < 1685  }{
+\def\abstract{
+#1
+}
+}{}
+}
+% Comando para el titulo
+
+% Comando para la pagina de autorizacion y uso
+\newcommand{\IdentificacionObra}[2]{
+\ConstanciaDias{#1}
+\FechaFinTT{\the\year/#2/#1}
+\StrLen{#2}[\nummes]
+\ifthenelse{\equal{\nummes}{0}}{
+\FechaDias{\hl{Fecha no ingresada}}
+\FechaGeneral{\hl{Fecha no ingresada}}
+}{
+\ifthenelse{#2 < 13 \and #2 > 0}{
+\ifthenelse{\equal{#2}{01}}{
+\FechaDias{Ibarra, a los #1 días del mes de enero de \the\year.}
+\FechaGeneral{Ibarra, #1 de enero de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{02}}{
+\FechaDias{Ibarra, a los #1 días del mes de febrero de \the\year.}
+\FechaGeneral{Ibarra, #1 de febrero de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{03}}{
+\FechaDias{Ibarra, a los #1 días del mes de marzo de \the\year.}
+\FechaGeneral{Ibarra, #1 de marzo de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{04}}{
+\FechaDias{Ibarra, a los #1 días del mes de abril de \the\year.}
+\FechaGeneral{Ibarra, #1 de abril de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{05}}{
+\FechaDias{Ibarra, a los #1 días del mes de mayo de \the\year.}
+\FechaGeneral{Ibarra, #1 de mayo de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{06}}{
+\FechaDias{Ibarra, a los #1 días del mes de junio de \the\year.}
+\FechaGeneral{Ibarra, #1 de junio de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{07}}{
+\FechaDias{Ibarra, a los #1 días del mes de julio de \the\year.}
+\FechaGeneral{Ibarra, #1 de julio de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{08}}{
+\FechaDias{Ibarra, a los #1 días del mes de agosto de \the\year.}
+\FechaGeneral{Ibarra, #1 de agosto de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{09}}{
+\FechaDias{Ibarra, a los #1 días del mes de septiembre de \the\year.}
+\FechaGeneral{Ibarra, #1 de septiembre de \the\year.}
+}{}
+\ifthenelse{\equal{#2}{10}}{
+\FechaDias{Ibarra, a los #1 días del mes de octubre de \the\year.}
+\FechaGeneral{Ibarra, #1 de octubre de \the\year.}
+}
+}{}
+\ifthenelse{\equal{#2}{11}}{
+\FechaDias{Ibarra, a los #1 días del mes de noviembre de \the\year.}
+\FechaGeneral{Ibarra, #1 de noviembre de \the\year.}}{}
+\ifthenelse{\equal{#2}{12}}{
+\FechaDias{Ibarra, a los #1 días del mes de diciembre de \the\year.}
+\FechaGeneral{Ibarra, #1 de diciembre de \the\year.}}{}}{
+\FechaDias{\hl{Fecha no ingresada}}
+\FechaGeneral{\hl{Fecha no ingresada}}
+
+}
+
+\newpage
+\vspace{0.20cm}
+\begin{center}
+\textbf{UNIVERSIDAD TÉCNICA DEL NORTE} \\
+\textbf{BIBLIOTECA UNIVERSITARIA} \\
+\vspace{1cm}
+ {\fontsize{14}{16}\selectfont {
+\textbf{IDENTIFICACIÓN DE LA OBRA}
+}}
+\end{center}
+\vspace{0.25cm}
+
+La Universidad Técnica del Norte dentro del proyecto Repositorio Digital Institucional, determinó la necesidad de disponer de textos completos en formato digital con la finalidad de apoyar los procesos de investigación, docencia y extensión de la Universidad. \\
+\vspace{0.25cm}
+Por medio del presente documento dejo sentada mi voluntad de participar en este proyecto, para lo cual pongo a disposición la siguiente información:
+
+
+
+
+\begin{table}[H]
+\begin{tabular}{|m{0.30\linewidth}|m{0.15\linewidth}|m{0.20\linewidth}|m{0.15\linewidth}|}
+\hline
+\multicolumn{4}{|l|}{
+\cellcolor[HTML]{C0C0C0}
+  { \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+  DATOS DE CONTACTO} }}
+}                                    \\ \hline
+\multicolumn{1}{|l|}{
+
+  { \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+  CÉDULA DE IDENTIDAD: }}}
+} & \multicolumn{3}{l|}{\sffamily \cedulaestudiante}    \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+  APELLIDOS Y NOMBRES: }}}
+} & \multicolumn{3}{|p{0.50\linewidth}|}{\sffamily \autornombres}   \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+  DIRECCIÓN: }}}
+}           & \multicolumn{3}{|p{0.50\linewidth}|}{\sffamily \autordireccion} \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ EMAIL:}}}
+}   & \multicolumn{3}{l|}{\sffamily\autorcorreo}    \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+   TELF. FIJO: }}}
+} & \multicolumn{1}{l|}{\sffamily \telefono} & \multicolumn{1}{l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ TELF. MÓVIL: }}}
+} & \sffamily \telmovil \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|m{0.5\linewidth}|m{0.57\linewidth}|}
+\hline
+\multicolumn{2}{|l|}{
+\cellcolor[HTML]{C0C0C0}
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ DATOS DE LA OBRA}}}
+}               \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+TÍTULO:}}}
+}  & \sffamily \titulotesis \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ AUTOR(ES):}}}
+} & \sffamily \autornombres \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ FECHA:}}}
+} &  \sffamily \fechafintt \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+ CARRERA/PROGRAMA:}}}
+}               & \sffamily PREGRADO \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+TÍTULO POR EL QUE OPTA:}}}
+} &  \sffamily \titulocarrera \\ \hline
+\multicolumn{1}{|l|}{
+{ \fontsize{10}{10}\selectfont {\textbf{\sffamily 
+DIRECTOR:}}}
+}  &  \sffamily \directortesis   \\ \hline
+
+\end{tabular}
+\end{table}
+
+}
+
+
+% Autorizacion de Uso
+\newcommand{\AutorizacionUso}{
+\newpage
+\begin{center}
+ {\fontsize{14}{16}\selectfont {
+\textbf{AUTORIZACIÓN DE USO A FAVOR DE LA UNIVERSIDAD}
+}}
+\end{center}
+\vspace{1cm}
+Yo, \nombres , con cédula de identidad Nro. \cedulaestudiante , en calidad de autor (es) y titular (es) de los derechos patrimoniales de la obra o trabajo de integración curricular descrito anteriormente, hago entrega del ejemplar respectivo en formato digital y autorizo a la Universidad Técnica del Norte, la publicación de la obra en el Repositorio Digital Institucional y uso del archivo digital en la Biblioteca de la Universidad con fines académicos, para ampliar la disponibilidad del material y como apoyo a la educación, investigación y extensión; en concordancia con la Ley de Educación Superior Artículo 144. \\
+\vspace{2cm}
+\fechadias
+\vspace{2cm}
+
+\textbf{EL AUTOR:}
+
+\begin{table}[h]
+\begin{tabular}{l}
+Firma \includegraphics[width=0.4\linewidth]{ANTEPROYECTO/09.-FIRMA/firma.png}  \\
+Nombre \nombres
+\end{tabular}
+\end{table}
+
+}
+
+\newcommand{\AprobacionComite}{
+
+\newpage
+\begin{center}
+ {\fontsize{14}{16}\selectfont {
+\textbf{APROBACIÓN DEL COMITÉ CALIFICADOR}
+}}
+\end{center}
+\vspace{1cm}
+El   Comité Calificado del trabajo de Integración Curricular “ \tema ” elaborado por \nombres, previo a la obtención del título del \titulogrado , aprueba el presente informe de investigación en nombre de la Universidad Técnica del Norte:
+
+\vspace{2cm}
+\begin{table}[H]
+\begin{center}
+    \begin{tabular}{c}
+\multicolumn{1}{l}{\includegraphics[width=0.4\linewidth]{TESIS/10.FIRMAS/firmaDirector.png}}         \\ \hline
+\vspace{0.25cm}
+\textit{\director  }\\
+\textit{C.C: \ceduladirector }\\
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+    \begin{tabular}{c}
+\multicolumn{1}{l}{
+\includegraphics[width=0.4\linewidth]{TESIS/10.FIRMAS/firmaAsesor.png}
+}         \\ \hline
+\vspace{0.25cm}
+\textit{\nombresasesor }\\
+\textit{C.C: \cedulasesor}\\
+\end{tabular}
+\end{center}
+\end{table}
+
+}
+
+% Comando para mostrar la Certificacion del Director
+\newcommand{\CertificacionDirector}{
+\newpage
+
+\begin{center}
+ {\fontsize{14}{16}\selectfont {
+\textbf{CERTIFICACIÓN DEL DIRECTOR DEL TRABAJO DE INTEGRACIÓN CURRICULAR}
+}}
+\end{center} 
+\vspace{1cm}
+\begin{flushleft}
+\fechageneral
+\end{flushleft}
+\director \\
+DIRECTOR DEL TRABAJO DE INTEGRACIÓN CURRICULAR \\
+\vspace{0.5cm}
+CERTIFICA: \\
+Haber revisado el presente informe final del trabajo de Integración Curricular, el mismo que se ajusta a las normas vigentes de la Universidad Técnica del Norte; en consecuencia, autorizo su presentación para los fines legales pertinentes.
+\vspace{3cm}
+\begin{table}[H]
+\begin{center}
+    \begin{tabular}{c}
+\multicolumn{1}{l}{\includegraphics[width=0.4\linewidth]{TESIS/10.FIRMAS/firmaDirector.png}}         \\ \hline
+\vspace{0.25cm}
+\textit{\director }\\
+\textit{C.C: \ceduladirector }\\
+\end{tabular}
+\end{center}
+\end{table}
+
+}
+
+% Comando para la página de Constancia
+\newcommand{\Constancia}{
+\newpage
+\vspace{3cm}
+ \begin{center}
+  {\fontsize{14}{16}\selectfont {
+\textbf{CONSTANCIAS}
+}}
+ \end{center}
+\vspace{1cm}
+ El autor (es) manifiesta (n) que la obra objeto de la presente autorización es original y se la desarrolló, sin violar derechos de autor de terceros, por lo tanto, la obra es original y que es (son) el (los) titular (es) de los derechos patrimoniales, por lo que asume (n) la responsabilidad sobre el contenido de la misma y saldrá (n) en defensa de la Universidad en caso de reclamación por parte de terceros. \\
+\vspace{1cm}
+\fechadias
+\vspace{2cm}
+
+\textbf{EL AUTOR:}
+
+\vspace{2cm}
+\begin{table}[h]
+\begin{tabular}{l}
+Firma \includegraphics[width=0.4\linewidth]{ANTEPROYECTO/09.-FIRMA/firma.png}  \\
+Nombre \nombres
+\end{tabular}
+\end{table}
+}
+
+% Comando para ingresar el número de días
+\newcommand{\ConstanciaDias}[1]{
+\StrLen{#1}[\numconstanciadias]
+\def\constanciadias{
+\RevisarCampo{#1}{\msgDias}
+}
+}
+
+% Comando para ingresar el mes
+\newcommand{\ConstanciaMes}[1]{
+\def\constanciames{
+\MesFinal{#1}
+}}
+
+% Comando palabras claves
+\newcommand{\PalabrasClave}[1]{
+\def\palabrasclaves{
+\textbf{Palabras clave: } #1
+}}
+
+\newcommand{\KeyWords}[1]{
+\def\keywords{
+\textbf{Keywords: } #1
+}}
+
+
+
+% Comando para ingresar el número de días
+\newcommand{\CertificacionDias}[1]{
+\def\certificaciondias{
+\RevisarCampo{#1}{\msgDia}
+}
+}
+
+% Comando para ingresar el mes
+\newcommand{\CertificacionMes}[1]{
+\def\certificacionmes{
+\RevisarCampo{#1}{\msgMes}
+}}
+
+\newcommand{\FechaFinTT}[1]{
+\def\fechafintt{
+\ifthenelse{\nummes > 0 \and  \numconstanciadias > 0}{#1}{\msgFechaCulminada}
+}
+}
+
+\newcommand{\FechaDias}[1]{
+\def\fechadias{
+\ifthenelse{\nummes > 0 \and \numconstanciadias > 0}{#1}{\msgFechaCulminada}
+}
+}
+
+\newcommand{\FechaGeneral}[1]{
+\def\fechageneral{
+\ifthenelse{\nummes > 0 \and \numconstanciadias > 0}{#1}{\msgFechaCulminada}
+}
+}
+
+
+
+\newcommand{\MesFinal}[1]{
+\StrLen{#1}[\nummes]
+\def\mesfinal{
+\ifthenelse{\equal{\nummes}{0}}{
+\hl{mes no ingresado}
+}{
+\ifthenelse{#1 < 13 \and #1 > 0}{
+\ifthenelse{\equal{#1}{01}}{enero}{}
+\ifthenelse{\equal{#1}{02}}{febrero}{}
+\ifthenelse{\equal{#1}{03}}{marzo}{}
+\ifthenelse{\equal{#1}{04}}{abril}{}
+\ifthenelse{\equal{#1}{05}}{mayo}{}
+\ifthenelse{\equal{#1}{06}}{junio}{}
+\ifthenelse{\equal{#1}{07}}{julio}{}
+\ifthenelse{\equal{#1}{08}}{agosto}{}
+\ifthenelse{\equal{#1}{09}}{septiembre}{}
+\ifthenelse{\equal{#1}{10}}{octubre}{}
+\ifthenelse{\equal{#1}{11}}{noviembre}{}
+\ifthenelse{\equal{#1}{12}}{diciembre}{}}{\hl{mes no válido}}
+}}}
+
+% Comando para verificar si el estudiante
+% Necesita certificaciones
+\newcommand{\opcion}{Si}
+\newcommand{\TieneCertificaciones}[1]{
+\ifthenelse{\equal{#1}{\opcion}}{%
+\includepdf{TESIS/02.CERTIFICACIONES/Certificaciones.pdf}
+}{}
+}
+
+% Comando para mostrar la dedicatoria
+\newcommand{\Dedicatoria}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{DEDICATORIA}
+\section*{\begin{center}
+  { \fontsize{13}{13}\selectfont {\textbf{
+DEDICATORIA}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/03.DEDICATORIA/dedicatoria}
+\begin{flushright}
+\nombres
+\end{flushright}
+}
+
+% Comando para mostrar el agradecimiento
+\newcommand{\Agradecimiento}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{AGRADECIMIENTO}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+AGRADECIMIENTO}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/04.AGRADECIMIENTO/agradecimiento}
+\begin{flushright}
+\nombres
+\end{flushright}
+}
+
+% Comando para mostrar el resumen
+\newcommand{\ResumenSeccion}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{RESUMEN}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+RESUMEN}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/05.RESUMEN/resumen}
+\resumen \\
+\palabrasclaves
+
+}
+
+% Comando para mostrar el abstract
+\newcommand{\AbstractSeccion}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{ABSTRACT}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+ABSTRACT }}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/06.ABSTRACT/abstract}
+\abstract \\
+\keywords
+}
+
+
+% Comando para mostrar el capitulo 01
+\newcommand{\CapituloUno}{
+\newpage
+\chapter{CAPÍTULO I}
+
+{\vspace{-1cm} \hspace{5cm} \fontsize{14}{16}\selectfont {\textbf{
+INTRODUCCIÓN}}}
+
+\input{TESIS/CAPITULO-01/capitulo01}
+}
+
+% Comando para mostrar el capitulo 02
+\newcommand{\CapituloDos}{
+\newpage
+\chapter{CAPÍTULO II}
+
+{\vspace{-1cm} \hspace{5cm}\fontsize{14}{16}\selectfont {\textbf{
+MARCO TEÓRICO}}}
+
+\input{TESIS/CAPITULO-02/capitulo02}
+}
+
+% Comando para mostrar el capitulo 03
+\newcommand{\CapituloTres}{
+\newpage
+\chapter{CAPÍTULO III}
+\begin{center}
+{ \vspace{-1cm} \fontsize{14}{16}\selectfont {\textbf{
+MATERIALES Y MÉTODOS}}}
+\end{center}
+\input{TESIS/CAPITULO-03/capitulo03}
+}
+
+% Comando para mostrar el capitulo 03
+\newcommand{\CapituloCuatro}{
+\newpage
+\chapter{CAPÍTULO IV}
+\begin{center}
+{\vspace{-1cm} \fontsize{14}{16}\selectfont {\textbf{
+RESULTADOS Y ANÁLISIS}}}
+\end{center}
+\input{TESIS/CAPITULO-04/capitulo04}
+}
+% Comando para mostrar las conclusiones
+\newcommand{\Conclusiones}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{CONCLUSIONES}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+CONCLUSIONES}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/07.CONCLUSIONES/conclusiones}
+}
+
+% Comando para mostrar las recomendaciones
+\newcommand{\Recomendaciones}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{RECOMENDACIONES}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+RECOMENDACIONES}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/08.RECOMENDACIONES/recomendaciones}
+}
+
+
+
+% Comando para mostrar la bibliografia
+\newcommand{\Bibliografia}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{BIBLIOGRAFÍA}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+ BIBLIOGRAFÍA}}}
+\end{center}}
+\vspace{-2cm}
+\printbibliography[heading=none]
+}
+
+% Comando para mostrar los anexos
+\newcommand{\Anexos}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{ANEXOS}
+\section*{\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{ 
+ ANEXOS}}}
+\end{center}}
+\vspace{-2cm}
+\input{TESIS/09.ANEXOS/anexos}
+}
+
+
+% Comando para mostrar la lista de figuras
+
+\newcommand{\IndiceFiguras}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{ÍNDICE DE FIGURAS}
+\vspace{10cm}
+\listoffigures
+}
+
+\newcommand{\IndiceTablas}{
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{ÍNDICE DE TABLAS}
+\listoftables
+}
+
+\newcommand{\TablaContenidos}{
+\newpage
+\renewcommand*\contentsname{
+\vspace{-3.5cm}
+\begin{center}
+{ \fontsize{13}{13}\selectfont {\textbf{
+ÍNDICE DE CONTENIDOS}}}
+\end{center}}
+\tableofcontents
+}
+
+\newcommand{\insertarfigura}[2]{
+\begin{figure}[H]
+    \centering
+    \caption{\textit{#2}}
+    \includegraphics[width=0.5\linewidth]{#1}
+\end{figure}
+}
+

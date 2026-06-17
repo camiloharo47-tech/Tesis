@@ -1,0 +1,46 @@
+% El siguiente paquete permite colocar etiquetas
+% de informacion para que los usuarios sepan
+% que deben ingresar en cada campo
+
+\RequirePackage[document]{ragged2e}
+\RequirePackage{color}
+\RequirePackage{soul}
+\RequirePackage{xstring}
+\RequirePackage{xifthen}
+\RequirePackage{anteproyectoTesis}
+\RequirePackage{anteproyectoIndicaciones}
+\RequirePackage{enumitem}
+\ProvidesPackage{tesisIndicaciones}[2023/07/08]
+
+
+\DeclareOption*{\PackageWarning{tesisIndicaciones}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% comandos para mostrar mensajes en los
+% campos correspondientes
+
+\newcommand{\msgDias}{
+ \hl{número de días}
+}
+
+\newcommand{\msgResumen}[1]{
+ \hl{El resumen debe tener 250 palabras como mínimo, su resumen tiene #1 caracteres está fuera del rango de 250 palabras }
+}
+
+
+\newcommand{\msgDia}{
+ \hl{día}
+}
+
+\newcommand{\msgMes}{
+ \hl{mes}
+}
+
+
+\newcommand{\msgCarrera}{
+ \hl{Nombre de la carrera}
+}
+\newcommand{\msgFechaCulminada}{
+ \hl{Escriba la fecha en la que terminó su trabajo de titulación en formato
+ dd/MM/yyyy}
+}

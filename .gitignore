@@ -1,0 +1,25 @@
+# Auxiliares y logs
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.bcf
+*.run.xml
+*.blg
+*.bbl
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales de editores
+*~
+*.swp
+*.swo

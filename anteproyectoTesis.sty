@@ -1,0 +1,869 @@
+%  El siguiente archivo contiene los macros que fueron creadaas para
+%  realizar este paquete para la elaboración del anteproyecto de grado
+%  se recomienda no modificar este archivo pero en caso de ser 
+%  necesario puede hacerlo.
+
+\RequirePackage[document]{ragged2e}
+\RequirePackage{anteproyectoIndicaciones}
+\RequirePackage{color}
+\RequirePackage{soul}
+\RequirePackage{xstring}
+\RequirePackage{xifthen}
+\RequirePackage{enumitem}
+\RequirePackage{mfirstuc}
+\RequirePackage{chngcntr}
+\ProvidesPackage{anteproyectoTesis}[2023/10/02]
+
+\DeclareOption*{\PackageWarning{anteproyectoTesis}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+
+% Definir el contador
+\newcounter{mivariable}
+
+% Definir el comando para incrementar el contador
+\newcommand{\incrementarcontador}[1]{%
+  \addtocounter{#1}{1}%
+
+}
+
+
+% comandos para ingreso de información
+\newcommand{\Carrera}[1]{
+\CarreraFICA{#1}
+\Carreralinea{#1}
+}
+
+
+\newcommand{\TituloGrado}[1]{
+\TituloCarrera{#1}
+\StrLen{#1}[\numtitulo]
+\def\titulogrado{
+\ifthenelse{\equal{\numtitulo}{0}}{
+\msgTituloGrado}{#1}
+}}
+
+
+\newcommand{\TituloCarrera}[1]{
+\StrLen{#1}[\numtitulocarrera]
+\def\titulocarrera{
+\ifthenelse{\equal{\numtitulocarrera}{0}}{
+\MakeUppercase{\msgTituloGrado}
+}{\MakeUppercase{#1}}
+}}
+
+\newcommand{\CarreraFICA}[1]{
+\StrLen{#1}[\numcarrera]
+\def\carrerafica{#1}
+}
+
+\newcommand{\Tema}[1]{
+\TituloTesis{#1}
+\def\tema{
+\RevisarCampo{#1}{\msgTema}}}
+
+
+
+\newcommand{\Area}[1]{
+\def\area{#1}
+}
+
+\newcommand{\InvestigacionContinua}[1]{
+\StrLen{#1}[\linvcontinua]
+\def\invcontinua{
+#1
+}
+}
+
+\newcommand{\InvestigacionNueva}[1]{
+\StrLen{#1}[\linvnueva]
+\def\invnueva{
+#1
+}}
+
+
+\newcommand{\Entidad}[1]{
+\def\entidad{
+\RevisarCampo{#1}{\msgEntidadAuspiciante}
+}
+}
+
+\newcommand{\Director}[1]{
+\DirectorTesis{#1}
+\StrLen{#1}[\tamdirector]
+\def\director{\RevisarCampo{#1}{\msgDirectorTesis}}
+}
+
+\newcommand{\DirectorTesis}[1]{
+\StrLen{#1}[\numdirectortesis]
+\def\directortesis{
+\ifthenelse{\equal{\numdirectortesis}{0}}{
+\MakeUppercase{\msgDirectorTesis}
+}{\MakeUppercase{#1}}
+}}
+
+
+\newcommand{\Autor}[1]{
+\AutorNombres{#1}
+\def\nombres{
+\RevisarCampo{#1}{\msgAutorNombres}
+}
+}
+
+\newcommand{\LineaInvestigacion}[1]{
+\def\linea{
+\RevisarCampo{#1}{\msgLineaInvestigacion}
+}
+}
+
+\newcommand{\SubLineaInvestigacion}[1]{
+\def\sublinea{
+\RevisarCampo{#1}{\msgSublineaInvestigacion}
+}
+}
+
+\newcommand{\PertinenciaTesis}[1]{
+\def\pertinencia{
+\RevisarCampo{#1}{\msgPertinenciaTesis}
+}
+}
+
+\newcommand{\PropuestoPor}[1]{
+\def\propuesto{
+\RevisarCampo{#1}{\msgPropuestoPor}
+}
+}
+
+\newcommand{\AreasTecnicas}[1]{
+\StrLen{#1}[\tamanio]
+\def\areatecnica{
+
+\ifthenelse{\tamanio > 0}{
+\makeatletter
+\@for\listitem:={#1}\do{
+\begin{itemize}
+  \item[$\bullet$] \listitem  
+\end{itemize}
+}
+\makeatother
+}{\msgAreasTecnicas}}}
+
+
+\newcommand{\ObjetivosEspecificos}[1]{
+\StrLen{#1}[\numobjE]
+\def\objEspecifico{
+\ifthenelse{\numobjE > 0}{
+\makeatletter
+\@for\listitem:={#1}\do{
+\begin{itemize}
+  \item[$\bullet$] \listitem  
+\end{itemize}
+}
+\makeatother
+}{\msgObjGeneral}}}
+
+\newcommand{\ObjetivoGeneral}[1]{
+\StrLen{#1}[\numobjG]
+\def\objGeneral{
+\ifthenelse{\numobjG > 0}{
+\begin{itemize}
+  \item[$$] #1  
+\end{itemize}
+\vspace{0.5cm}
+}{\msgObjGeneral}}}
+
+\newcommand{\DirectorSugerido}[1]{
+\def\directorsugerido{
+\RevisarCampo{#1}{\msgDirectorSugerido}
+}
+}
+
+\newcommand{\CedulaDirector}[1]{
+\def\ceduladirector{
+\RevisarCampo{#1}{\msgCedulaIdentidad}
+}
+}
+
+\newcommand{\CedulaEstudiante}[1]{
+\def\cedulaestudiante{
+\RevisarCampo{#1}{\msgCedulaIdentidad}
+}
+}
+\newcommand{\NombreDirector}{
+\def\nombredirector{
+\ifthenelse{\tamdirector > 0}{\director}{\msgNombresApellidos}
+}}
+
+\newcommand{\DocenteTitulacion}[1]{
+\StrLen{#1}[\tamdocente]
+\def\docentetitulacion{
+\ifthenelse{\tamdocente > 0}{#1}{\msgNombresApellidos}
+}}
+
+\newcommand{\CedulaAsesor}[1]{
+\def\cedulasesor{
+\RevisarCampo{#1}{\msgCedulaIdentidad}
+}
+}
+
+\newcommand{\NombreAsesor}[1]{
+\AsesorTesis{#1}
+\def\nombresasesor{
+\RevisarCampo{#1}{\msgAsesorTesis}
+}
+}
+
+
+
+\newcommand{\AsesorTesis}[1]{
+\StrLen{#1}[\numasesortesis]
+\def\asesortesis{
+\ifthenelse{\equal{\numasesortesis}{0}}{
+\MakeUppercase{\msgNombresApellidos}
+}{\MakeUppercase{#1}}
+}}
+
+
+
+\newcommand{\FechaRevision}[1]{
+\def\fecharevision{
+\RevisarCampo{#1}{\msgFechaRevision}
+}
+}
+\newcommand{\Direccion}[1]{
+\AutorDireccion{#1}
+\def\direccion{
+\RevisarCampo{#1}{\msgAutorDireccion}
+}
+}
+
+\newcommand{\Telefono}[1]{
+\def\telefono{
+\RevisarCampo{#1}{\msgAutorTelefono}
+}
+}
+
+\newcommand{\Correo}[1]{
+\AutorCorreo{#1}
+\def\correo{
+\RevisarCampo{#1}{\msgAutorCorreo}
+}
+}
+
+\newcommand{\AutorCorreo}[1]{
+\StrLen{#1}[\numautorcorreo]
+\def\autorcorreo{
+\ifthenelse{\equal{\numautorcorreo}{0}}{
+\MakeUppercase{\msgAutorCorreo}
+}{\MakeUppercase{#1}}
+}}
+
+\newcommand{\LugarTrabajo}[1]{
+\def\lugarTrabajo{
+\RevisarCampo{#1}{\msgLugarTrabajo}
+}
+}
+
+\newcommand{\TelefonoTrabajo}[1]{
+\def\telefonoTrabajo{
+\RevisarCampo{#1}{\msgtelefonoTrabajo}
+}
+}
+
+\newcommand{\DireccionTrabajo}[1]{
+\def\direccionTrabajo{
+\RevisarCampo{#1}{\msgDireccionTrabajo}
+}
+}
+
+\newcommand{\Duracion}[1]{
+\def\duracion{
+\RevisarCampo{#1}{\msgDuracionTesis}
+}
+}
+
+\newcommand{\TelefonoMovil}[1]{
+\def\telmovil{
+\RevisarCampo{#1}{\msgTelfMovil}
+}
+}
+
+
+\newcommand{\capitalizefirst}[1]{\expandafter\@capitalizefirst#1\@nil}
+\def\@capitalizefirst#1#2\@nil{\uppercase{#1}\lowercase{#2}}
+
+
+\newcommand{\Carreralinea}[1]{
+\def\carreralinea{
+\capitalizefirst{#1}
+}
+}
+\newcommand{\TituloTesis}[1]{
+\StrLen{#1}[\numtitulot]
+\def\titulotesis{
+\ifthenelse{\equal{\numtitulot}{0}}{
+\MakeUppercase{\msgTema}
+}{\MakeUppercase{#1}}
+}
+}
+
+\newcommand{\AutorNombres}[1]{
+\StrLen{#1}[\numautornombres]
+\def\autornombres{
+\ifthenelse{\equal{\numautornombres}{0}}{
+\MakeUppercase{\msgAutorNombres}
+}{\MakeUppercase{#1}}
+}}
+
+\newcommand{\AutorDireccion}[1]{
+\StrLen{#1}[\numautordireccion]
+\def\autordireccion{
+\ifthenelse{\equal{\numautordireccion}{0}}{
+\MakeUppercase{\msgAutorDireccion}
+}{\MakeUppercase{#1}}
+}}
+
+
+\newcommand{\Presupuesto}[1]{
+\def\presupuesto{
+\RevisarCampo{#1}{\msgPresupuestoTesis}
+}
+}
+
+% comando para  revisar el campo de investigación
+\newcommand{\RevisaCampoInvestigacion}{
+\ifthenelse{\linvnueva = 0 \AND  \linvcontinua = 0}{
+\hl{Marque con una X según el tipo de investigación}
+}
+}
+
+% comando para revisar el campo de la carrera
+\newcommand{\RevisarCampoCarrera}{
+\ifthenelse{\equal{\numcarrera}{0}}{
+\mgsNombreCarrera
+}{CARRERA DE \carrerafica}
+}
+
+% comando para  revisar si existen contenidos
+\newcommand{\RevisarContenido}{
+\ifthenelse{\numcapuno = 0 \AND  \numcapdos = 0 \AND \numcaptres = 0}{
+\hl{Escriba los contenidos que se abordarán dentro de su trabajo de titulación}
+}
+}
+
+% comando para controlar el ancho de la columna en la tabla del plan de proyecto
+\newcommand{\tamcol}{4.5cm}
+
+
+% comandos para generar los contenidos del anteproyecto
+\newcommand{\ContenidosGenerales}[1]{
+\def\contenido{
+ #1
+}
+}
+
+\newcommand{\ContenidosFinales}[1]{
+\def\contenidofinal{
+ #1
+}
+}
+
+
+
+\newcommand{\ContenidosCapituloUno}[1]{
+\StrLen{#1}[\numcapuno]
+\def\contenidocapuno{
+ #1
+}
+}
+
+\newcommand{\ContenidosCapituloDos}[1]{
+\StrLen{#1}[\numcapdos]
+\def\contenidocapdos{
+ #1
+}
+}
+
+\newcommand{\ContenidosCapituloTres}[1]{
+\StrLen{#1}[\numcaptres]
+\def\contenidocaptres{
+ #1
+}}
+
+
+\newcommand{\ContenidosCapituloCuatro}[1]{
+\StrLen{#1}[\numcapcuatro]
+\def\contenidocapcuatro{
+ #1
+}}
+
+
+
+\newcommand{\GeneroEstudiante}[1]{
+\ifthenelse{\equal{#1}{F}}{
+\ArticuloGenero{la}
+\AbreviaturaGenero{Srta}
+\PortadorGenero{portadora}
+}{
+\ArticuloGenero{el}
+\AbreviaturaGenero{Sr}
+\PortadorGenero{portador}
+}}
+
+\newcommand{\ArticuloGenero}[1]{
+\def\articulogenero{
+#1}
+}
+
+\newcommand{\AbreviaturaGenero}[1]{
+\def\abreviaturagenero{
+#1
+}}
+
+\newcommand{\PortadorGenero}[1]{
+\def\portadorgenero{
+#1}}
+
+
+
+% comando para mostrar los contenidos del anteproyecto
+
+\newcommand{\tablaContenidos}{
+
+\let\olditemize\itemize
+\def\itemize{\olditemize\itemsep=0pt }
+
+\ContenidosCapituloUno{Planteamiento del Problema,  Objetivos, Alcance y delimitación , Justificación}
+
+\ContenidosFinales{
+\textbf{CONCLUSIONES Y RECOMENDACIONES},
+Conclusiones,
+Recomendaciones,
+\textbf{REFERENCIAS},
+\textbf{ANEXOS}
+}
+
+\RevisarContenido
+\begin{enumerate}
+\item \textbf{CAPÍTULO 1: INTRODUCCIÓN}
+\ifthenelse{\numcapuno > 0}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\contenidocapuno}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\hl{Tema 1}, 
+   \hl{Tema 2 }, \hl{Tema 3}}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}
+
+% capitulo 2
+\item \textbf{CAPÍTULO 2: MARCO TEÓRICO}
+\ifthenelse{\numcapdos > 0}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\contenidocapdos}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\hl{Tema 1}, 
+   \hl{Tema 2 }, \hl{Tema 3}}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}
+
+% capitulo 3
+\item \textbf{CAPÍTULO 3: MARCO METODOLÓGICO}
+\ifthenelse{\numcaptres > 0}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\contenidocaptres}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}{
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\hl{Tema 1}, 
+   \hl{Tema 2 }, \hl{Tema 3}}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}
+
+% capitulo 4
+
+\item \textbf{CAPITULO 4: RESULTADOS Y ANÁLISIS  }
+\ifthenelse{\numcapcuatro > 0}{
+
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\contenidocapcuatro}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}{
+\begin{enumerate}
+    \makeatletter
+   \@for\listitem:={\hl{Tema 1}, 
+   \hl{Tema 2 }, \hl{Tema 3}}\do{
+   \item \listitem
+   }
+\makeatother
+\end{enumerate}
+}
+
+\end{enumerate}
+\begin{itemize}
+    \makeatletter
+   \@for\listitem:={\contenidofinal}\do{
+   \item[$ $]\listitem
+   }
+\makeatother
+\end{itemize}
+
+}
+
+
+
+
+
+% comando para mostrar la tabla con la información personal
+\newcommand{\SeccionUnoTablaPersonal}{
+\input{ANTEPROYECTO/0.0-DATOS-GENERALES/informacion}
+\input{UTILES/Encabezado/encabezado}
+\vspace{0.75cm}
+\begin{flushleft}
+\textbf{DATOS GENERALES}
+\end{flushleft}
+
+\begin{center}
+
+\begin{longtable}[c]{|p{0.5\linewidth}|p{0.5\linewidth}|}
+
+    \endhead
+     \multicolumn{2}{p{1\linewidth}}{{}} \\
+    \endfoot
+    \hline
+    \multicolumn{2}{|p{1\linewidth}|}{1.	TEMA:
+    \newline
+    \tema
+    
+    }\\
+    \hline
+   \multicolumn{2}{|p{1\linewidth}|}{2.	ÁREA / LÍNEA DE INVESTIGACIÓN: 
+   \newline
+   Línea de Investigación Carrera de\carreralinea: {\linea}
+    \newline
+   }\\
+    \hline
+    \multicolumn{2}{|p{1\linewidth}|}{3.	ENTIDAD QUE AUSPICIA: 
+    \newline
+   \entidad}\\
+    \hline
+   \multicolumn{2}{|p{1\linewidth}|}{4.	DIRECTOR DE TRABAJO DE TITULACIÓN: 
+   \newline
+   \director}\\
+    \hline
+  \multicolumn{2}{|p{1\linewidth}|}{
+5.	AUTOR: \nombres 
+\newline
+\hspace{3mm} DIRECCIÓN:\hspace{-3mm}\direccion
+\newline
+\hspace{3mm} TELÉFONO: \hspace{-3mm}\telefono
+\newline
+\hspace{3mm} CORREO ELECTRÓNICO: \hspace{-3mm}\correo
+
+} \\
+\hline
+\multicolumn{2}{|p{1\linewidth}|}{
+6.	DURACIÓN (Estimado): \hspace{-3mm}\duracion } \\
+\hline
+\multicolumn{2}{|p{1\linewidth}|}{
+7.	INVESTIGACIÓN:  Nueva $($ \invnueva $)$   	Continuación   $($ \invcontinua $)$ \RevisaCampoInvestigacion
+} \\
+
+\hline
+\multicolumn{2}{|p{1\linewidth}|}{
+8.	PRESUPUESTO (Estimado): \$ \hspace{-3mm}\presupuesto
+} \\
+\hline
+\multicolumn{2}{|c|}{
+\cellcolor[HTML]{EFEFEF} PARA USO DEL CONSEJO ACADÉMICO
+} \\
+\hline
+  \cellcolor[HTML]{EFEFEF}     FECHA DE ENTREGA:   &   \cellcolor[HTML]{EFEFEF}FECHA DE REVISIÓN:        \\
+\hline
+     \cellcolor[HTML]{EFEFEF}  APROBADO: SI (  )    NO (  )   &  \cellcolor[HTML]{EFEFEF} FECHA DE APROBACIÓN:      \\
+\hline
+\multicolumn{2}{|l|}{\cellcolor[HTML]{EFEFEF}}                                 \\
+\multicolumn{2}{|l|}{\multirow{-2}{*}{\cellcolor[HTML]{EFEFEF}OBSERVACIONES:}} \\ \hline
+\end{longtable}
+\end{center}
+
+}
+
+% comando para mostrar la seccion02 de la tabla
+% de los datos personales
+
+
+
+
+% comandos para el ingreso de datos en la parte de contexto
+\newcommand{\SeccionDosTablaPersonal}{
+\begin{center}
+\begin{longtable}[c]{|m{0.5\linewidth}|m{0.46\linewidth}|}
+    \endhead
+     \multicolumn{2}{p{1\linewidth}}{{}} \\
+    \endfoot
+\hline
+   \cellcolor[HTML]{EFEFEF} \textbf{Propuesto por:}       &   \cellcolor[HTML]{EFEFEF} \textbf{ Áreas Técnicas del Tema}     \\
+   \cellcolor[HTML]{EFEFEF}   \propuesto  &   \cellcolor[HTML]{EFEFEF} \areatecnica   \\
+\hline
+   \cellcolor[HTML]{EFEFEF} \textbf{Director sugerido:}  
+ 
+   &  \cellcolor[HTML]{EFEFEF} \textbf{Fecha:  }   \\
+   \cellcolor[HTML]{EFEFEF} \directorsugerido  &  \cellcolor[HTML]{EFEFEF}  \fecharevision   \\
+  
+\hline
+    \end{longtable}
+\end{center}
+
+}
+
+%  Comando para mostrar el plan de proyecto
+\newcommand{\SeccionUnoTablaProyecto}{
+\vspace{1cm}
+\begin{center}
+\begin{longtable}[l]{|m{0.5\linewidth}|m{0.5\linewidth}|}
+
+    \endhead
+     \multicolumn{2}{p{1\linewidth}}{{}} \\
+    \endfoot
+    \hline
+    \multicolumn{2}{|p{1\linewidth}|}{ \leftskip 0.50cm  \textbf{ 1. \hspace{1mm} Tema}
+    \newline
+    \leftskip 1.25cm 
+    \tema}\\
+    \hline
+   \multicolumn{2}{|p{1\linewidth}|}{
+   \newline
+    \leftskip 0.50cm \textbf{2. \hspace{1mm} Planteamiento del Problema}
+    
+    \leftskip 1cm 
+    \vspace{2mm}
+    \setlength{\parskip}{0.5cm}
+    \input{ANTEPROYECTO/0.1-PROBLEMA/problema}
+   
+    }\\
+    \hline
+\end{longtable}
+\end{center}
+
+}
+
+\newcommand{\SeccionDosTablaProyecto}{
+\begin{center}
+\begin{longtable}[l]{|m{0.5\linewidth}|m{0.5\linewidth}|}
+    \endhead
+     \multicolumn{2}{p{1\linewidth}}{{}} \\
+    \endfoot
+    \hline
+    \multicolumn{2}{|p{1\linewidth}|}{
+     \input{ANTEPROYECTO/0.2-OBJETIVOS/objetivo}
+     \leftskip 0.50cm \textbf{3. \hspace{1mm} Objetivos }
+     \vspace{3mm}
+     \newline
+     \textbf{3.1 Objetivo General}
+     \vspace{3mm}
+     \newline
+     \leftskip 1cm 
+     \objGeneral 
+
+     \leftskip 0.50cm \textbf{3.2 Objetivos Específicos } 
+     \newline
+     \leftskip 1cm 
+     \objEspecifico
+  
+
+    }\\
+    \hline
+   \multicolumn{2}{|p{1\linewidth}|}{
+   
+    \leftskip 0.50cm \textbf{4. \hspace{1mm} Alcance }
+    \newline
+    \leftskip 1cm 
+    \vspace{2mm}
+    \setlength{\parskip}{0.5cm}
+    \input{ANTEPROYECTO/0.3-ALCANCE/alcance}
+   
+   }\\
+ \hline
+\multicolumn{2}{|p{1\linewidth}|}{
+
+\leftskip 0.50cm \textbf{5.  \hspace{1mm} Justificación}
+ 
+    \leftskip 1cm 
+    \vspace{2mm}
+    \setlength{\parskip}{0.5cm}
+    \input{ANTEPROYECTO/0.4-JUSTIFICACION/justificacion}
+    
+}\\
+\hline
+\multicolumn{2}{|p{1\linewidth}|}{
+
+\leftskip 0.50cm \textbf{6. \hspace{1mm} Antecedentes}
+    \newline
+    \leftskip 1cm 
+    \vspace{2mm}
+    \setlength{\parskip}{0.5cm}
+    \input{ANTEPROYECTO/0.5-ANTECEDENTES/antecedentes}
+    
+} \\
+\hline
+    \multicolumn{2}{|p{1\linewidth}|}{
+    
+    \leftskip 0.50cm \textbf{7. \hspace{1mm} Contenidos }
+    \newline
+    \leftskip 1cm 
+    \input{ANTEPROYECTO/0.6-CONTENIDOS/contenido}
+    \vspace{5mm}
+    \tablaContenidos
+    } \\
+ \hline
+\end{longtable}
+\end{center}
+}
+
+
+
+\newcommand{\SeccionCuatroTablaProyecto}{
+\begin{tcolorbox}[colback=white,colframe=black, sharp corners]{
+\textbf{10.	Bibliografía.}
+\printbibliography[heading=none]}
+\end{tcolorbox}
+}
+
+
+\newcommand{\seccionFirmaDocentes}{
+\NombreDirector
+\vspace{3cm}
+\begin{table}[h]
+\hspace{-1cm}
+\begin{tabular}{cll}
+\multicolumn{1}{l}{}                &  &                                      \\ \cline{1-1} \cline{3-3} 
+DIRECTOR DE TRABAJO DE   TITULACIÓN &  & ASESOR DE TRABAJO DE TITULACIÓN      \\
+\nombredirector                    &  & \multicolumn{1}{c}{\nombresasesor} \\
+ &  & \multicolumn{1}{c}{}          
+\end{tabular}
+\end{table}
+
+}
+
+\newcommand{\seccionFirmaDocenteEstudiante}{
+\NombreDirector
+\vspace{1cm}
+\begin{table}[h]
+\begin{center}
+\hspace{-1cm}
+\begin{tabular}{cll}
+\multicolumn{1}{l}{}                &  & \includegraphics[width=0.5\linewidth]{ANTEPROYECTO/09.-FIRMA/firma.png}                                     \\ \cline{1-1} \cline{3-3} 
+DOCENTE DE TITULACIÓN I &  &  \hspace{20mm}ESTUDIANTE      \\
+\docentetitulacion                    &  & \multicolumn{1}{c}{\nombres} \\
+                             &  & \multicolumn{1}{c}{}          
+\end{tabular}
+\end{center}
+\end{table}
+
+}
+
+\newcommand{\seccionFirmaEstudiante}{
+\vspace{0.2cm}
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{ccl}
+\multicolumn{1}{l}{} & \multicolumn{1}{l}{
+\includegraphics[width=0.5\linewidth]{ANTEPROYECTO/09.-FIRMA/firma.png}
+
+}         &                      \\ \cline{2-2}
+                     & ESTUDIANTE                   &                      \\
+                     & \nombres & \multicolumn{1}{c}{} \\
+                     & \cedulaestudiante                     & \multicolumn{1}{c}{}
+\end{tabular}
+\end{center}
+\end{table}
+
+}
+
+% Comandos para las secciones del plan de proyecto
+\newcommand{\SeccionProblema}{
+\textbf{Planteamiento del Problema} \\
+\input{ANTEPROYECTO/0.1-PROBLEMA/problema}
+}
+\newcommand{\SeccionObjetivos}{
+     \input{ANTEPROYECTO/0.2-OBJETIVOS/objetivo}
+     \textbf{Objetivos }
+     \vspace{3mm}
+     \newline
+     \textbf{Objetivo General}
+     \vspace{3mm}
+     \newline
+     \objGeneral 
+     \textbf{Objetivos Específicos } 
+     \newline
+     \objEspecifico
+}
+
+\newcommand{\SeccionAlcance}{
+\textbf{Alcance } \\
+\input{ANTEPROYECTO/0.3-ALCANCE/alcance}
+}
+
+
+
+\newcommand{\SeccionJustificacion}{
+\textbf{Justificación } \\
+\input{ANTEPROYECTO/0.4-JUSTIFICACION/justificacion}
+}
+
+
+\newcommand{\figura}[1]{
+\begin{center}
+    \includegraphics[width=0.6\linewidth]{#1}
+\end{center}
+ }
+
+ \newcommand{\namefigura}[2]{
+ \textbf{\fontsize{10}{12}\selectfont Figura #1.}
+ \newline
+ \textit{\fontsize{10}{12}\selectfont \hspace{2 mm}#2}
+ }
+
+\newcommand{\nombreFigura}[1]{
+\incrementarcontador{mivariable}
+\addcontentsline{lof}{figure}{\protect\numberline{} Figura \arabic{mivariable}. \textit{#1}
+}
+\namefigura{\arabic{mivariable}}{#1}
+}

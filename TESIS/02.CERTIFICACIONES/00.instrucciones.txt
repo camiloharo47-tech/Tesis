@@ -1,0 +1,11 @@
+En está carpeta deberá subir las certificaciones en caso de tenerla.
+Siga las siguientes instruccciones:
+
+1) Borre el archivo Certificaciones.pdf que se encuentra como ejemplo.
+
+2) Suba un archivo pdf con el nombre Certificaciones.pdf.
+
+3) En el archivo certificaciones.tex dentro
+de la función TieneCertificaciones en las llaves escriba Si en lugar de No para que puede visualizar el contenido del archivo que subió a la carpeta.
+
+4) Presione nuevamente el botón recompilar.

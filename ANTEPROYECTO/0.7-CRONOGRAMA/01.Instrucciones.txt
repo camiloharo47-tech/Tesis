@@ -1,0 +1,10 @@
+En está carpeta deberá subir el archivo del cronograma para su trabajo de titulación.
+Por favor siga las siguientes instruccciones:
+
+1) Borre el archivo Cronograma.pdf que se encuentra como ejemplo.
+
+3) Descarge la plantilla del archivo Cronograma.xlsx
+
+2) Suba nuevamente el archivo descargado en formato pdf con el nombre Cronograma.pdf.
+
+3) Presione nuevamente el botón recompilar.

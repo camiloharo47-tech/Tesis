@@ -1,0 +1,8 @@
+En está carpeta deberá subir una imagen de su firma.
+Por favor siga las siguientes instruccciones:
+
+1) Borre la imagen firma.png que se encuentra como ejemplo.
+
+2) Suba la imagen de su firma  con el nombre firma en formato png.
+
+3) Presione nuevamente el botón recompilar.

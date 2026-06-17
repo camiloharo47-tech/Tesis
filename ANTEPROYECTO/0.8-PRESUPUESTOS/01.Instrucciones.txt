@@ -1,0 +1,10 @@
+En está carpeta deberá subir el archivo del presupuesto para su trabajo de titulación.
+Por favor siga las siguientes instruccciones:
+
+1) Borre el archivo Presupuesto.pdf que se encuentra como ejemplo.
+
+3) Descarge la plantilla del archivo Presupuesto.xlsx
+
+2) Suba nuevamente el archivo descargado en formato pdf con el nombre Presupuesto.pdf.
+
+3) Presione nuevamente el botón recompilar.
