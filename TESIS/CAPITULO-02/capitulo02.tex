@@ -1,53 +1,500 @@
 
+\section{Antecedentes} 
 \section{Ingeniería de Requisitos }
-La Ingeniería de requisitos es el desarrollo de software que abarca todas las actividades para descubrir, analizar y mantener las necesidades 
-de los usuarios.El propósito principal es traducir las ideas y problemas de negocio en especificaciones técnicas claras y verificables 
-para evitar errores costosos.
+La Ingeniería de Requisitos es una disciplina de la Ingeniería de Software encargada de identificar, analizar, 
+documentar, validar y gestionar las necesidades y restricciones que debe satisfacer un sistema software. Su objetivo principal es asegurar
+que las expectativas de los interesados sean comprendidas y representadas de manera clara, completa y verificable antes de iniciar 
+las etapas de diseño e implementación \cite{Wolf2026}.
+
+La Ingeniería de Requisitos agrupa diversas tareas conectadas entre sí, siendo las más relevantes la obtención, el estudio, la documentación,
+la verificación y la administración de los requisitos. Gracias a estas tareas, se logra un entendimiento común entre quienes solicitan el sistema, 
+quienes lo usarán y quienes lo construyen, lo que disminuye la probabilidad de fallos, la necesidad de repetir trabajos y los gastos adicionales 
+a lo largo del desarrollo del software.
+
+En los últimos años, el interés por automatizar algunas de estas tareas mediante técnicas de procesamiento del lenguaje natural e inteligencia
+artificial ha incrementado considerablemente, debido a la necesidad de mejorar la calidad de las especificaciones y disminuir el esfuerzo asociado 
+a su elaboración manual \cite{cheng2026generative}
+
+\subsection{Metodología de Elicitación de Requisitos}
+La elicitación de requisitos es una de las actividades fundamentales de la Ingeniería de Requisitos, cuyo propósito es identificar, comprender 
+y recopilar las necesidades, expectativas y restricciones de los interesados para definir las funcionalidades y características que deberá 
+satisfacer el sistema software. Una adecuada ejecución de este proceso contribuye a disminuir errores derivados de requisitos incompletos, 
+ambiguos o inconsistentes, reduciendo el riesgo de retrabajos y fallos durante las etapas posteriores del desarrollo \cite{Akhtar2025}, \cite{Umar2024}.
+
+El proceso de elicitación generalmente inicia con la identificación de los interesados y continúa con la selección de técnicas apropiadas para obtener 
+información del dominio del problema. Entre las técnicas más empleadas se encuentran las entrevistas, cuestionarios, talleres colaborativos, observación 
+directa, análisis documental y prototipado. La elección de una técnica específica depende de factores como la complejidad del sistema, la disponibilidad 
+de los participantes y el contexto organizacional en el que se desarrolla el proyecto \cite{Akhtar2025}, \cite{canedo2022guidelines}. En metodologías ágiles, la elicitación se considera una 
+actividad iterativa que permite refinar continuamente los requisitos conforme evolucionan las necesidades del negocio.
+
+En los últimos años, la incorporación de técnicas de inteligencia artificial y procesamiento del lenguaje natural ha permitido asistir el proceso 
+de elicitación mediante la extracción automática de información, la identificación de requisitos implícitos y el análisis de conversaciones sostenidas 
+con los interesados. Estas tecnologías buscan complementar las prácticas tradicionales y mejorar la eficiencia en la generación de especificaciones de 
+requisitos, manteniendo la participación humana como elemento esencial para validar la información obtenida y garantizar su correspondencia con las 
+necesidades reales de los usuarios \cite{Umar2024}.
+
+\subsection{Estándar IEEE 830-1998}
+El estándar IEEE 830-1998 establece una práctica recomendada para la elaboración de documentos de Especificación de Requisitos de Software, 
+proporcionando una estructura organizada para describir de manera clara, completa y verificable las funcionalidades, restricciones y características 
+de un sistema software. Entre los atributos de calidad que deben cumplir los requisitos especificados se encuentran la ausencia de ambigüedad, 
+consistencia, completitud, trazabilidad y verificabilidad, con el propósito de facilitar la comunicación entre clientes, usuarios y desarrolladores 
+durante el ciclo de vida del proyecto \cite{Umar2024}, \cite{Wolf2026}.
+
+Aunque el estándar fue reemplazado posteriormente por la norma ISO/IEC/IEEE 29148, el IEEE 830-1998 continúa siendo ampliamente utilizado en entornos 
+académicos y de investigación debido a la simplicidad de su estructura y a su adopción en numerosos trabajos relacionados con la automatización 
+de documentos SRS. La especificación propuesta por este estándar se organiza en secciones que incluyen la introducción, descripción general del 
+sistema, requisitos específicos, interfaces externas, requisitos funcionales, restricciones de diseño y otros atributos de calidad relevantes para 
+el sistema desarrollado \cite{Akhtar2025}.
+
+En investigaciones recientes sobre automatización de la Ingeniería de Requisitos, el uso de modelos de lenguaje de gran escala y sistemas 
+multi-agente ha permitido generar artefactos con alta aceptación por parte de expertos, aunque empleando diversos marcos de validación.
+Por ejemplo, se han desarrollado herramientas para la generación de historias de usuario cuya calidad se evalúa mediante encuestas de métricas 
+técnicas como el modelo RUST Asimismo, marcos basados en agentes autónomos utilizan guías especializadas, como la IPA’s NFRs Grade 2018, para 
+estructurar la extracción de requisitos no funcionales En el contexto de esta investigación, y a diferencia de los marcos mencionados, 
+se utilizará el estándar IEEE 830-1998 como guía específica para estructurar y validar los documentos SRS generados automáticamente, 
+permitiendo comparar la conformidad de los resultados con documentos elaborados manualmente por expertos \cite{Rahman2024}, \cite{Mukaida2025}.
+
+Si bien la norma ISO/IEC/IEEE 29148 ha sustituido oficialmente al IEEE 830-1998, este último sigue teniendo vigencia en el ámbito académico. 
+Su estructura clara y su extensa utilización en estudios enfocados en la creación y valoración automática de documentos de Especificación de 
+Requisitos de Software (SRS) explican que aún sea ampliamente empleado en entornos de investigación.
+
+\subsection{Tipos de requisitos: funcionales}
+Los requisitos de software representan las capacidades, restricciones y condiciones que debe cumplir un sistema para satisfacer las necesidades 
+de sus usuarios y demás partes interesadas. De manera general, los requisitos suelen clasificarse en funcionales y no funcionales. Los requisitos 
+funcionales describen los servicios, comportamientos y funciones específicas que el sistema debe proporcionar, mientras que los requisitos no 
+funcionales establecen atributos de calidad relacionados con el rendimiento, seguridad, usabilidad, confiabilidad y 
+mantenibilidad del software \cite{Wolf2026}, \cite{Umar2024}.
+
+Los requisitos funcionales constituyen uno de los elementos más importantes dentro de un documento de Especificación de Requisitos de Software 
+(SRS), debido a que definen las operaciones que deberá ejecutar el sistema en respuesta a determinadas entradas, condiciones o interacciones con 
+los usuarios. La adecuada identificación y documentación de estos requisitos facilita las actividades posteriores de diseño, implementación y pruebas, 
+además de contribuir a mejorar la trazabilidad y verificabilidad del producto desarrollado \cite{Akhtar2025}. Diversos estudios recientes han explorado el uso de 
+técnicas de procesamiento de lenguaje natural y modelos de lenguaje de gran escala para automatizar la extracción y clasificación de requisitos 
+funcionales a partir de entrevistas, historias de usuario y otros artefactos expresados en lenguaje natural \cite{Rahman2024}.
+
+En el contexto de esta investigación, el sistema multi-agente propuesto se enfoca principalmente en la identificación y clasificación automática de 
+requisitos funcionales obtenidos a partir de audios de entrevistas realizadas a Product Owners. Posteriormente, estos requisitos son enriquecidos 
+contextualmente y organizados en un documento SRS estructurado conforme al estándar IEEE 830-1998, permitiendo disminuir el esfuerzo asociado a la 
+elaboración manual de especificaciones y mejorar la calidad de la documentación generada \cite{Umar2024}, \cite{Mukaida2025}.
 
 
 \subsection{Proceso de elicitación de requisitos}
-La elicitación de requisitos se la define como una etapa critica dentro de la ingeniería de requisitos, cuyo objetivo principal es comprender, estructurar 
-y documentar las necesidades de los usuarios que se busca satisfacer con un producto de software. 
+La elicitación de requisitos es una actividad fundamental de la Ingeniería de Requisitos cuyo propósito es descubrir, comprender y recopilar 
+las necesidades, expectativas y restricciones de las partes interesadas para definir las funcionalidades y características que deberá satisfacer 
+un sistema software. Debido a que los requisitos suelen expresarse en lenguaje natural y provienen de diferentes actores con perspectivas diversas, 
+esta etapa es considerada una de las más complejas y críticas dentro del proceso de desarrollo, ya que errores u omisiones introducidos en esta fase 
+pueden propagarse a etapas posteriores y generar costos significativos de corrección \cite{Akhtar2025}, \cite{Umar2024}.
 
-Según el modelo MoDeMaRE (Model to Develop and Manage Requirements Engineering), la elicitación es la segunda etapa del proceso,precedida por 
-una Etapa Temprana donde se reconoce el contexto y se comprende el dominio del problema \cite{serna2016documentar}
+El proceso de elicitación generalmente inicia con la identificación de los interesados y la comprensión del dominio del problema, seguido de la 
+selección de técnicas adecuadas para obtener información relevante. Entre las técnicas más utilizadas se encuentran las entrevistas, cuestionarios, 
+talleres colaborativos, observación directa, análisis documental y prototipado. La elección de una técnica específica depende de factores como la 
+complejidad del proyecto, la disponibilidad de los participantes y el contexto organizacional. En entornos ágiles, la elicitación se desarrolla de 
+manera iterativa, permitiendo refinar continuamente los requisitos a medida que evolucionan las necesidades del negocio \cite{Hoy2023}, \cite{canedo2022guidelines}.
 
-Actividades y Objetivos
-Durante esta fase se debe identificar 
+En los últimos años, la incorporación de técnicas de inteligencia artificial y procesamiento del lenguaje natural ha permitido complementar las 
+actividades tradicionales de elicitación mediante la extracción automática de información, el análisis de conversaciones y la identificación de 
+requisitos implícitos. Estas tecnologías buscan reducir el esfuerzo asociado a la documentación manual y mejorar la calidad de las especificaciones 
+generadas. En este contexto, la presente investigación emplea entrevistas realizadas a Product Owners como fuente principal de información, las cuales 
+son procesadas mediante un sistema multi-agente para obtener y estructurar requisitos funcionales conforme al estándar IEEE 830-1998 \cite{Umar2024}.
 
 
-\subsection{Tipos de requisitos: funcionales}
-\subsection{Metodología de Elicitación de Requisitos de Durán y Bernárdez}
-\subsection{Estándar IEEE 830-1998}
 
 
 \section{Inteligencia Artificial aplicada a la Ingeniería de Software }
 \subsection{Modelos de Lenguaje de Gran Escala (LLMs)}
+Los Modelos de Lenguaje de Gran Escala (Large Language Models, LLMs) son sistemas de inteligencia artificial entrenados sobre grandes volúmenes de 
+datos textuales con el objetivo de comprender, generar y transformar lenguaje natural. Estos modelos se basan principalmente en la arquitectura 
+Transformer, la cual emplea mecanismos de atención para capturar relaciones contextuales entre palabras y secuencias de texto, permitiendo 
+realizar tareas como generación de contenido, resumen automático, clasificación de información, traducción y asistencia en el 
+desarrollo de software \cite{zadenoori2025large}, \cite{hemmat2025research}.
+
+El desempeño de los LLMs ha impulsado su adopción en diferentes áreas de la Ingeniería de Software, incluyendo la Ingeniería de Requisitos, donde se 
+utilizan para apoyar actividades de elicitación, análisis, validación y generación de especificaciones. Investigaciones recientes evidencian que estos 
+modelos pueden contribuir a mejorar la calidad de documentos de requisitos, identificar inconsistencias y automatizar tareas tradicionalmente realizadas
+por expertos humanos. Sin embargo, la mayoría de aplicaciones reportadas se desarrollan en entornos controlados y aún presentan limitaciones 
+relacionadas con la precisión de las respuestas y la comprensión del contexto específico del dominio \cite{Umar2024}, \cite{khan2025large}.
+
+En el contexto de esta investigación, los LLMs constituyen el núcleo de procesamiento de los agentes inteligentes encargados de analizar transcripciones 
+de entrevistas, clasificar requisitos funcionales y generar documentos de Especificación de Requisitos de Software conforme al estándar IEEE 830-1998. 
+Su capacidad para interpretar lenguaje natural y producir texto estructurado permite automatizar actividades de Ingeniería de Requisitos que 
+tradicionalmente requieren una elevada intervención manual \cite{Umar2024}, \cite{ellsel2025advancing}.
+
+
 \subsection{Limitaciones de los LLMs}
+A pesar de sus capacidades para comprender y generar texto en lenguaje natural, los Modelos de Lenguaje de Gran Escala (LLMs) presentan diversas 
+limitaciones que restringen su aplicación en dominios que requieren alta precisión, como la Ingeniería de Requisitos. Una de las principales 
+problemáticas es la generación de información incorrecta o inexistente, fenómeno conocido como hallucination o alucinación, en el que el modelo 
+produce respuestas plausibles pero sin sustento en fuentes verificables. Asimismo, estos modelos pueden heredar sesgos presentes en los datos de 
+entrenamiento, afectando la objetividad y confiabilidad de los resultados generados \cite{ji2023survey}, \cite{rawte2023survey}.
+
+Otra limitación importante corresponde a la gestión de contextos extensos y especializados. Aunque los LLMs modernos permiten procesar grandes 
+cantidades de información, su desempeño puede degradarse cuando deben analizar documentos largos, múltiples conversaciones o información altamente 
+específica de un dominio determinado. Adicionalmente, el conocimiento incorporado en el modelo se encuentra limitado a la fecha de corte de sus datos 
+de entrenamiento, impidiendo acceder a información actualizada o a fuentes externas en tiempo real \cite{Guo2024}, \cite{hemmat2025research}.
+
+Estas limitaciones resultan especialmente relevantes en tareas de Ingeniería de Requisitos, donde es necesario preservar la consistencia, completitud y 
+trazabilidad de las especificaciones generadas. Por esta razón, investigaciones recientes han propuesto complementar los LLMs mediante técnicas de 
+recuperación de información, arquitecturas multi-agente y mecanismos de inyección de contexto externo, con el propósito de mejorar la calidad de las 
+respuestas y reducir la probabilidad de generar información errónea. En este trabajo de investigación, dichas limitaciones motivan la incorporación 
+de un agente de enriquecimiento contextual y el uso del Model Context Protocol (MCP) para proporcionar información adicional a los modelos de lenguaje 
+empleados \cite{Wolf2026}, \cite{Umar2024}.
+
 \subsection{Retrieval-Augmented Generation (RAG)}
+Retrieval-Augmented Generation (RAG) es una técnica que combina modelos de lenguaje de gran escala con mecanismos de recuperación de información 
+externa para mejorar la precisión y actualidad de las respuestas generadas. A diferencia de los LLMs convencionales, que dependen únicamente del 
+conocimiento adquirido durante su entrenamiento, RAG incorpora información relevante obtenida dinámicamente desde bases de datos, repositorios 
+documentales o fuentes externas, permitiendo proporcionar respuestas fundamentadas en evidencia y reduciendo la probabilidad de generar información 
+incorrecta o desactualizada \cite{gao2023retrieval}, \cite{lewis2020retrieval}.
+
+El funcionamiento de RAG se basa generalmente en dos etapas principales: recuperación y generación. En la primera etapa, un sistema de búsqueda 
+identifica y selecciona documentos o fragmentos de texto relacionados con la consulta del usuario mediante técnicas de similitud semántica o búsqueda 
+vectorial. Posteriormente, la información recuperada es incorporada al contexto de entrada del modelo de lenguaje, el cual utiliza dichos datos para 
+generar una respuesta más precisa y contextualizada. Este enfoque ha demostrado mejoras significativas en tareas de respuesta a preguntas, resumen 
+automático, generación de código y aplicaciones especializadas en dominios como la medicina, 
+educación e ingeniería de software \cite{gao2023retrieval}, \cite{huang2026survey}.
+
+En el ámbito de la Ingeniería de Requisitos, RAG puede emplearse para enriquecer especificaciones obtenidas durante entrevistas de elicitación, 
+proporcionando información complementaria proveniente de estándares, documentación técnica o fuentes de conocimiento especializadas. En esta 
+investigación, el Agente de Enriquecimiento Contextual implementa un enfoque basado en RAG para complementar los requisitos funcionales identificados 
+a partir de las transcripciones de entrevistas, utilizando información obtenida mediante servicios externos accesibles a través del Model Context 
+Protocol (MCP), con el propósito de mejorar la completitud y coherencia del documento SRS generado automáticamente \cite{lewis2020retrieval}, \cite{hemmat2025research}.
+
+
 
 \section{Sistemas Multi-agente }
+Los sistemas multiagente (MAS) son plataformas distribuidas compuestas por varios agentes autónomos que se comunican entre ellos y con el 
+ambiente que los rodea, con el fin de dar solución a problemas complejos de forma colaborativa. Al repartir las tareas entre agentes con 
+funciones específicas, se facilita el manejo de problemas que serían complejos de resolver con un solo elemento inteligente, lo que incrementa 
+la capacidad de crecimiento, la adaptabilidad y la solidez del sistema.
+
+
 \subsection{Definición y características de los agentes de IA}
+Un agente de inteligencia artificial es una entidad de software capaz de percibir información de su entorno, procesarla, tomar decisiones 
+y ejecutar acciones con el propósito de alcanzar objetivos específicos. A diferencia de los programas tradicionales, los agentes poseen 
+cierto grado de autonomía y pueden adaptarse dinámicamente a cambios en el entorno, utilizando mecanismos de razonamiento, memoria y 
+aprendizaje para mejorar su desempeño \cite{Guo2024}, \cite{zhang2025survey}.
+
+Entre las principales características de los agentes de IA se encuentran la autonomía, que les permite operar sin intervención humana constante; 
+la reactividad, que facilita responder a eventos del entorno; la proactividad, relacionada con la capacidad de anticiparse a situaciones futuras; y l
+a habilidad social, que posibilita la interacción y cooperación con otros agentes o usuarios. En sistemas basados en LLMs, estas capacidades pueden 
+complementarse mediante el uso de herramientas externas, memoria persistente y acceso a fuentes de conocimiento especializadas \cite{zhang2025survey}, \cite{durante2024agent}.
+
+En esta investigación, cada agente especializado desempeña una función específica dentro del proceso de generación automática de documentos SRS. 
+El agente de transcripción convierte el audio en texto, el agente de análisis identifica y clasifica requisitos funcionales, el agente de enriquecimiento
+contextual recupera información adicional mediante RAG y el agente generador construye el documento SRS conforme al estándar IEEE 830-1998. 
+La especialización de tareas permite reducir la complejidad del sistema y mejorar la calidad de los resultados obtenidos \cite{Guo2024}, \cite{xi2025rise}.
+
+
 \subsection{Arquitecturas multi-agente basadas en LLMs}
+Las arquitecturas multi-agente basadas en Modelos de Lenguaje de Gran Escala están compuestas por múltiples agentes inteligentes que colaboran 
+para resolver tareas complejas mediante la distribución de responsabilidades y el intercambio de información. Cada agente puede estar especializado 
+en actividades específicas, tales como planificación, razonamiento, recuperación de conocimiento, uso de herramientas externas o generación de 
+contenido, permitiendo superar las limitaciones de los LLMs individuales \cite{Guo2024}, \cite{xi2025rise}.
+
+Diversos estudios han propuesto arquitecturas organizadas de forma jerárquica, colaborativa o basada en roles. En las arquitecturas jerárquicas, 
+un agente coordinador supervisa la ejecución de agentes subordinados, mientras que en las arquitecturas colaborativas los agentes intercambian 
+información de manera descentralizada para alcanzar un objetivo común. También existen enfoques basados en roles, donde cada agente posee 
+responsabilidades claramente definidas dentro del flujo de trabajo del sistema \cite{Guo2024}, \cite{durante2024agent}.
+
+La arquitectura propuesta en esta investigación corresponde a un enfoque jerárquico basado en roles, en el que un agente orquestador coordina 
+la ejecución secuencial de cuatro agentes especializados encargados de la transcripción, análisis, enriquecimiento contextual y generación del 
+documento SRS. Esta distribución de funciones facilita la modularidad del sistema y permite incorporar nuevos agentes o servicios externos sin 
+afectar significativamente el funcionamiento general de la solución desarrollada \cite{xi2025rise}, \cite{zhang2025survey}.
+
+
 \subsection{Coordinación y comunicación entre agentes}
+La coordinación y comunicación entre agentes constituyen elementos fundamentales en los sistemas multi-agente, ya que permiten organizar 
+la ejecución de tareas, intercambiar información y alcanzar objetivos comunes de manera eficiente. En arquitecturas basadas en inteligencia 
+artificial generativa, la coordinación puede realizarse mediante agentes supervisores u orquestadores encargados de asignar responsabilidades, 
+controlar el flujo de trabajo y gestionar la interacción entre agentes especializados. Este enfoque contribuye a mejorar la modularidad, 
+escalabilidad y capacidad de adaptación del sistema ante cambios en los requerimientos o en el entorno de operación \cite{Guo2024}, \cite{xi2025rise}.
+
+Los mecanismos de comunicación entre agentes pueden implementarse utilizando intercambio de mensajes, memoria compartida, bases de conocimiento 
+comunes o protocolos estandarizados que faciliten la interoperabilidad entre componentes heterogéneos. En sistemas multi-agente basados en LLMs, 
+la comunicación estructurada permite transmitir instrucciones, resultados parciales y contexto adicional entre agentes, reduciendo la pérdida de 
+información y favoreciendo procesos colaborativos de razonamiento. Asimismo, la incorporación de herramientas externas y servicios especializados 
+amplía las capacidades de los agentes, permitiéndoles acceder a información actualizada y ejecutar acciones fuera de las capacidades intrínsecas 
+del modelo de lenguaje \cite{Guo2024}, \cite{durante2024agent}.
+
+En esta investigación, la coordinación del sistema es realizada por un Agente Orquestador que dirige la ejecución secuencial de los agentes de 
+transcripción, análisis y clasificación, enriquecimiento contextual y generación del documento SRS. La comunicación entre estos agentes y los 
+servicios externos se gestiona mediante el Model Context Protocol (MCP), el cual proporciona una interfaz estandarizada para intercambiar contexto, 
+invocar herramientas y acceder a recursos externos, garantizando un flujo de información estructurado durante el proceso de generación automatizada 
+del documento de especificación de requisitos \cite{xi2025rise}, \cite{zhang2025survey}.
+
 \subsection{Frameworks para sistemas multi-agente}
+Los frameworks para sistemas multi-agente proporcionan componentes reutilizables y mecanismos de abstracción que facilitan el desarrollo, 
+coordinación y ejecución de agentes inteligentes. En el contexto de aplicaciones basadas en Modelos de Lenguaje de Gran Escala (LLMs), estos 
+frameworks permiten definir roles especializados, administrar estados conversacionales, integrar herramientas externas y gestionar flujos de 
+trabajo complejos, reduciendo el esfuerzo de implementación y mejorando la mantenibilidad de las soluciones desarrolladas \cite{Guo2024}, \cite{xi2025rise}.
+
+Entre los frameworks más utilizados se encuentran AutoGen, LangGraph, CrewAI y Semantic Kernel. AutoGen permite construir conversaciones 
+entre múltiples agentes autónomos capaces de colaborar para resolver tareas complejas, mientras que LangGraph facilita la definición de 
+flujos de trabajo mediante grafos dirigidos y estados persistentes. Por su parte, CrewAI se orienta a la creación de equipos de agentes 
+con roles específicos y Semantic Kernel proporciona mecanismos para integrar modelos de lenguaje con herramientas, memoria y servicios 
+externos \cite{xi2025rise}, \cite{wu2023autogen}. Estas plataformas han ganado relevancia debido a su flexibilidad para implementar arquitecturas multi-agente en aplicaciones 
+de automatización, asistencia inteligente e ingeniería de software.
+
+En esta investigación, aunque el sistema propuesto no depende de un framework multi-agente específico, las capacidades ofrecidas por estas 
+herramientas constituyen una referencia para el diseño de la arquitectura planteada. En particular, la existencia de un agente orquestador, 
+agentes especializados y mecanismos de comunicación con servicios externos guarda similitud con las estrategias de coordinación implementadas 
+en dichos frameworks, facilitando además una posible evolución futura del prototipo hacia soluciones más robustas y escalables \cite{Guo2024}.
+
 
 
 \section{Model Context Protocol (MCP) }
+El Protocolo de Contexto para Modelos (MCP, por sus siglas en inglés) se presenta como un estándar pensado para simplificar la comunicación entre 
+modelos de lenguaje de gran escala y elementos externos, brindando un acceso ordenado a herramientas, bases de datos y servicios especializados. 
+Su finalidad fundamental es potenciar las habilidades de los sistemas de inteligencia artificial al integrar información contextual en tiempo real 
+y facilitar la conexión entre distintas aplicaciones.\cite{Anthropic2024}
+
 \subsection{Definición y propósito del MCP}
+El Model Context Protocol (MCP) es un estándar abierto que define una forma uniforme de vincular modelos lingüísticos con herramientas, 
+repositorios de datos y servicios externos. Su meta es brindar a los sistemas de inteligencia artificial un acceso regulado a información 
+complementaria y a funciones que van más allá de su conocimiento base, lo que les permite potenciar su capacidad de razonamiento y la ejecución 
+de tareas complejas. Con ello, el protocolo pretende dar respuesta a inconvenientes como la carencia de datos recientes, la excesiva dependencia 
+del conjunto de entrenamiento y las complicaciones para articular diversos servicios en una sola plataforma.
+
+La arquitectura propuesta integra el Model Context Protocol (MCP) para operacionalizar un enfoque inspirado en arquitecturas orientadas a servicios, 
+bajo el cual los agentes inteligentes pueden solicitar información o ejecutar acciones a través de servidores especializados que exponen recursos y 
+herramientas específicas. Esta estrategia técnica se fundamenta en la capacidad de uso de herramientas (tool-use), la cual permite a los modelos de 
+lenguaje aprovechar recursos externos para ampliar sus funciones y operar de manera más efectiva en entornos diversos . Este diseño modular favorece 
+la interoperabilidad entre aplicaciones heterogéneas y maximiza la reutilización de componentes, permitiendo incorporar nuevas capacidades al sistema 
+sin necesidad de modificar o reentrenar el modelo de lenguaje subyacente \cite{Guo2024}
+
+En esta investigación, se implementa el Model Context Protocol (MCP) como el mecanismo de comunicación para conectar los agentes especializados 
+con servicios externos de búsqueda web, almacenamiento de documentos y generación del documento SRS. Su utilización permite operacionalizar la 
+inyección de contexto adicional a los agentes inteligentes, mejorando la calidad de la información procesada y mitigando el riesgo de alucinaciones.
+Asimismo, este enfoque garantiza una arquitectura modular que facilita la gestión del sistema y futuras ampliaciones del prototipo desarrollado
+\cite{Guo2024}, \cite{xi2025rise}.
+
 \subsection{Arquitectura cliente-servidor}
+El Model Context Protocol (MCP) se basa en un modelo arquitectónico cliente-servidor que posibilita una interacción estandarizada entre 
+aplicaciones impulsadas por modelos de lenguaje y servicios externos. Bajo este enfoque, el cliente MCP se encarga de originar las peticiones 
+y de coordinar la comunicación con uno o múltiples servidores MCP, mientras que estos últimos ponen a disposición recursos, herramientas y 
+capacidades que el modelo de lenguaje puede aprovechar al momento de ejecutar una tarea concreta.Esta separación de responsabilidades facilita la 
+modularidad del sistema y permite incorporar nuevas capacidades sin modificar la lógica interna del modelo de inteligencia artificial.
+
+La arquitectura propuesta utiliza el Model Context Protocol (MCP) como mecanismo para establecer una comunicación estructurada entre clientes y 
+servidores mediante el intercambio de mensajes en formatos estandarizados. Su implementación permite descubrir capacidades disponibles en servidores 
+especializados y conectar a un mismo cliente con múltiples fuentes de información, tales como motores de búsqueda, bases de datos o sistemas de archivos. 
+Esta estrategia técnica se fundamenta en la capacidad de uso de herramientas (tool-use), la cual favorece la interoperabilidad entre componentes 
+heterogéneos y simplifica la integración de recursos externos dentro de aplicaciones basadas en Modelos de Lenguaje de Gran Escala \cite{Guo2024}.
+
+En la presente investigación, el Agente Orquestador desempeña el rol de cliente MCP, coordinando la comunicación con diversos servidores especializados. 
+Entre ellos se encuentran un servidor de búsqueda web para el enriquecimiento contextual de requisitos, un servidor de base de datos encargado del 
+almacenamiento de documentos SRS generados y un servidor orientado al soporte de generación estructurada del documento final. Esta arquitectura 
+permite desacoplar los servicios externos de los procesos cognitivos de los agentes, siguiendo los principios de modularidad y orquestación 
+propuestos por \cite{Guo2024},lo que facilita la escalabilidad y especialización necesaria para tareas de ingeniería de requisitos complejas \cite{xi2025rise}.
+
 \subsection{Resources, Tools y Prompts}
+Los conceptos de Resources, Tools y Prompts constituyen los elementos fundamentales del Model Context Protocol (MCP), permitiendo estandarizar la 
+interacción entre modelos de lenguaje y servicios externos. Los Resources representan fuentes de información que pueden ser consultadas por un modelo,
+tales como documentos, archivos, bases de datos o contenido web. Por su parte, los Tools corresponden a funciones ejecutables expuestas por un servidor 
+MCP, posibilitando realizar acciones específicas como efectuar búsquedas, consultar repositorios o almacenar información. Por su parte, los Tools 
+corresponden a funciones ejecutables que permiten al modelo interactuar con el entorno mediante acciones que generan efectos secundarios, tales como 
+modificar bases de datos o invocar APIs externas. Finalmente, los Prompts actúan como plantillas reutilizables que estructuran la interacción, 
+permitiendo una orquestación de flujos de trabajo más eficiente \cite{hou2025model}, \cite{hou2025model}.
+
+La separación entre recursos, herramientas y prompts permite desacoplar el contexto informativo, las capacidades operativas y las estructuras de 
+interacción de un sistema basado en LLMs. Esta organización favorece el descubrimiento dinámico de capacidades en servidores MCP y mejora la 
+interoperabilidad en entornos heterogéneos. Investigaciones recientes como ScaleMCP demuestran que esta arquitectura, combinada con mecanismos de 
+auto-sincronización, permite a los agentes gestionar de forma autónoma un vasto ecosistema de herramientas, superando las limitaciones de conocimiento 
+estático y proporcionando acceso a datos en tiempo real fuera del alcance interno del modelo \cite{hou2025model}, \cite{lumer2025scalemcp}
+
+
+En la presente investigación, el Agente de Enriquecimiento Contextual invoca Tools de servidores MCP para ejecutar búsquedas y recuperar información 
+técnica de servicios externos, mientras que el Agente Generador SRS emplea Prompts parametrizables para estructurar la especificación conforme al 
+estándar IEEE 830-1998. Esta arquitectura se apoya en los Resources suministrados por servidores especializados, los cuales proporcionan el contexto 
+de solo lectura necesario para garantizar que los documentos generados sean completos, coherentes y capturen fielmente las necesidades detectadas en 
+las entrevistas de elicitación \cite{hou2025model}, \cite{luo2025mcp}.
+
+En el contexto del presente trabajo, los servidores MCP implementados exponen principalmente herramientas (Tools) para la búsqueda de información y 
+almacenamiento de documentos, mientras que los Prompts son utilizados internamente por los agentes para estructurar la generación del documento SRS.
+
 \subsection{Integración del MCP con agentes de IA}
+La integración del Model Context Protocol (MCP) con agentes de inteligencia artificial permite ampliar las capacidades de los modelos de 
+lenguaje mediante el acceso estandarizado a recursos, herramientas y servicios externos. En lugar de depender únicamente del conocimiento adquirido 
+durante el entrenamiento, los agentes pueden utilizar MCP para consultar información actualizada, ejecutar acciones específicas y compartir contexto 
+con otros componentes del sistema. Este enfoque favorece el desarrollo de agentes más autónomos, adaptables y capaces de resolver tareas complejas que 
+requieren interacción con múltiples fuentes de información \cite{hou2025model}.
+
+En arquitecturas multi-agente basadas en LLMs, MCP actúa como una capa de interoperabilidad que facilita la comunicación entre agentes 
+especializados y servidores externos. A través de este protocolo, los agentes pueden descubrir dinámicamente las capacidades disponibles, 
+invocar herramientas remotas y acceder a recursos compartidos sin necesidad de implementar integraciones específicas para cada servicio. 
+Investigaciones recientes destacan que esta capacidad contribuye a mejorar la modularidad, escalabilidad y mantenibilidad de sistemas inteligentes 
+compuestos por múltiples agentes colaborativos \cite{hou2025model}, \cite{lumer2025scalemcp}.
+
+En la presente investigación, el Agente Orquestador desempeña el rol de cliente MCP, coordinando la comunicación con diversos servidores 
+especializados bajo el estándar abierto introducido por \cite{Anthropic2024}. Entre estos servidores se incluyen uno de búsqueda web para el 
+enriquecimiento contextual de requisitos, uno de base de datos para el almacenamiento de documentos SRS y un servidor orientado al soporte de 
+generación estructurada. Esta arquitectura permite desacoplar los servicios externos de los procesos cognitivos de los agentes, facilitando la 
+escalabilidad y el mantenimiento del sistema multi-agente propuesto, en línea con los principios de orquestación y especialización requeridos para 
+tareas de ingeniería de requisitos de alta complejidad \cite{Guo2024}, \cite{xi2025rise}."
+
+
+
 
 
 \section{Reconocimiento Automático de Voz (ASR) }
+El Reconocimiento Automático de Voz (Automatic Speech Recognition, ASR) es una tecnología de inteligencia artificial que permite convertir 
+señales de audio habladas en texto legible por máquinas. Gracias a los avances recientes en aprendizaje profundo y modelos neuronales de gran 
+escala, los sistemas ASR han alcanzado niveles de precisión que posibilitan su aplicación en diversos dominios, incluyendo asistentes virtuales, 
+sistemas de transcripción, atención al cliente e Ingeniería de Software \cite{Li2020}, \cite{Radford2022}
+
+En el contexto de la Ingeniería de Requisitos, el ASR representa una alternativa prometedora para automatizar la transcripción de entrevistas de 
+elicitación, reduciendo el esfuerzo manual asociado a la documentación y facilitando el procesamiento posterior de la información mediante modelos 
+de lenguaje y sistemas multi-agente \cite{Radford2022}, \cite{Umar2024}.
+
 \subsection{Fundamentos del ASR}
+El Reconocimiento Automático de Voz (Automatic Speech Recognition, ASR) es una tecnología que permite transformar señales de voz en texto mediante 
+técnicas de procesamiento digital de señales y aprendizaje automático. Los sistemas ASR modernos emplean modelos neuronales profundos capaces de 
+aprender representaciones acústicas y lingüísticas directamente a partir de grandes volúmenes de datos, eliminando la necesidad de diseñar manualmente 
+características específicas del habla. El objetivo principal de estos sistemas es minimizar la tasa de error de palabras (Word Error Rate, WER) y generar 
+transcripciones precisas incluso en presencia de ruido, variaciones de pronunciación o diferencias entre hablantes \cite{Radford2022}.
+
+El proceso de reconocimiento de voz comprende generalmente varias etapas, incluyendo el preprocesamiento de la señal de audio, la extracción de 
+características acústicas, el modelado acústico, el modelado del lenguaje y la decodificación de la secuencia de palabras más probable. En los últimos 
+años, las arquitecturas basadas en Transformers y modelos de aprendizaje autosupervisado han demostrado mejoras significativas respecto a enfoques 
+tradicionales basados en modelos ocultos de Markov y redes neuronales recurrentes, permitiendo obtener sistemas más robustos y capaces de generalizar a 
+diferentes idiomas y dominios de aplicación \cite{baevski2020wav2vec}.
+
+En el contexto de esta investigación, el ASR constituye el primer componente del sistema multi-agente propuesto, siendo responsable de convertir los 
+audios de entrevistas realizadas a Product Owners en transcripciones textuales que posteriormente serán procesadas por agentes especializados en análisis, 
+enriquecimiento contextual y generación automática del documento SRS. La precisión alcanzada durante esta etapa resulta fundamental, ya que errores en la 
+transcripción pueden propagarse al resto del flujo de procesamiento y afectar la calidad de las especificaciones generadas \cite{Radford2022}, \cite{Umar2024}.
+
+
+
 \subsection{Modelos open source para transcripción}
+Los avances recientes en reconocimiento automático de voz han impulsado el desarrollo de diversos modelos de código abierto capaces de realizar 
+transcripciones con altos niveles de precisión. Entre los más destacados se encuentra Whisper, desarrollado por OpenAI, el cual fue entrenado 
+mediante aprendizaje débilmente supervisado utilizando aproximadamente 680 000 horas de datos de audio multilingües recopilados de Internet. 
+Gracias a esta estrategia, Whisper presenta una elevada robustez frente a ruido de fondo, acentos y variaciones lingüísticas. Esto le permite 
+generalizar con éxito en un entorno zero-shot, logrando resultados competitivos en diversos dominios sin necesidad de un ajuste fino (fine-tuning) 
+específico para cada conjunto de datos \cite{Radford2022}."
+
+Otro modelo ampliamente utilizado es wav2vec 2.0, propuesto por Meta AI, que emplea aprendizaje autosupervisado para obtener representaciones del habla 
+a partir de grandes cantidades de audio sin etiquetar \cite{baevski2020wav2vec}. Tras un proceso de ajuste fino con datos anotados, este modelo logra 
+desempeños competitivos en diferentes conjuntos de evaluación, destacando por su eficiencia en entornos de bajos recursos de 
+datos \cite{baevski2020wav2vec}, \cite{Radford2022}. Asimismo, DeepSpeech constituye una alternativa de código abierto basada en redes neuronales 
+profundas, cuya arquitectura ha facilitado el despliegue de sistemas de reconocimiento de voz robustos en diversos dominios operativos \cite{Radford2022}.
+
+En esta investigación, el uso de modelos open source para transcripción resulta adecuado debido a su flexibilidad, disponibilidad y capacidad para 
+integrarse dentro de arquitecturas multi-agente. Particularmente, Whisper representa una opción prometedora para el Agente de Transcripción ASR, ya 
+que ofrece soporte multilingüe, alta precisión en escenarios reales y puede ejecutarse localmente o mediante servicios externos, facilitando su 
+incorporación al prototipo propuesto para procesar entrevistas de elicitación. En este flujo, el ASR permite transformar el lenguaje natural de 
+los interesados en datos procesables por el sistema multi-agente, optimizando la captura de necesidades técnicas \cite{Radford2022}, \cite{Akhtar2025}.
+
 \subsection{ASR aplicado a entrevistas de elicitación }
+Las entrevistas constituyen una de las técnicas de elicitación de requisitos más utilizadas en Ingeniería de Requisitos, ya que permiten obtener 
+información detallada sobre las necesidades, expectativas y restricciones de los interesados. Sin embargo, la documentación manual de estas sesiones 
+suele ser una actividad tediosa y propensa a errores, especialmente cuando las entrevistas poseen una larga duración o involucran múltiples 
+participantes. En este contexto, los sistemas de Reconocimiento Automático de Voz (ASR) ofrecen una alternativa para automatizar la transcripción de 
+las conversaciones, facilitando su posterior análisis y procesamiento \cite{Radford2022}, \cite{Umar2024}.
+
+La incorporación de tecnologías ASR en procesos de elicitación permite disponer de registros textuales completos de las entrevistas, reduciendo la 
+pérdida de información y mejorando la trazabilidad entre las necesidades expresadas por los usuarios y los requisitos documentados. Asimismo, las 
+transcripciones generadas pueden ser procesadas mediante modelos de lenguaje de gran escala para identificar requisitos funcionales, detectar 
+inconsistencias y asistir en la construcción de documentos de especificación. Estudios recientes evidencian un creciente interés por combinar 
+técnicas de procesamiento del lenguaje natural e inteligencia artificial para brindar soporte automatizado a actividades de Ingeniería 
+de Requisitos \cite{Umar2024}, \cite{Wolf2026}.
+
+En la presente investigación, el ASR representa el punto de partida del flujo de procesamiento del sistema multi-agente propuesto. El agente de 
+transcripción recibe el audio de entrevistas realizadas a Product Owners y genera una representación textual que posteriormente es utilizada por 
+agentes especializados en análisis, enriquecimiento contextual y generación del documento SRS conforme al estándar IEEE 830-1998. De esta manera, 
+la automatización de la transcripción contribuye a disminuir el esfuerzo asociado a la documentación manual y proporciona una base estructurada 
+para las etapas posteriores del proceso \cite{Radford2022}, \cite{Wolf2026}.
+
+
+
 \subsection{Integración del ASR en sistemas multi-agente}
+La integración del Reconocimiento Automático de Voz (ASR) en sistemas multi-agente permite distribuir las tareas de procesamiento del habla y 
+análisis de información entre componentes especializados, mejorando la modularidad y escalabilidad de la solución desarrollada. En este enfoque, 
+un agente dedicado al reconocimiento de voz es responsable de transformar el audio en texto, mientras que otros agentes pueden encargarse del 
+análisis semántico, recuperación de información, razonamiento o generación de documentos. Esta separación de responsabilidades facilita el mantenimiento 
+del sistema y permite sustituir o actualizar componentes individuales sin afectar el funcionamiento global de la 
+arquitectura \cite{Radford2022}, \cite{Guo2024}.
+
+
+Las arquitecturas multi-agente basadas en modelos de lenguaje han demostrado ser adecuadas para resolver tareas complejas que requieren el 
+procesamiento secuencial de información proveniente de distintas fuentes. La incorporación de un agente ASR como etapa inicial del flujo de 
+trabajo posibilita capturar conocimiento expresado verbalmente y convertirlo en información estructurada que puede ser utilizada por otros agentes 
+especializados. Además, la combinación de tecnologías ASR con modelos de lenguaje de gran escala favorece la automatización de procesos que 
+tradicionalmente dependen de intervención humana, incluyendo actividades relacionadas con la Ingeniería de Requisitos \cite{Guo2024}, \cite{Umar2024}.
+
+En la presente investigación, el Agente de Transcripción ASR constituye el primer componente del sistema multi-agente propuesto y tiene la 
+responsabilidad de procesar los audios de entrevistas realizadas a Product Owners. La salida generada por este agente es enviada al Agente 
+de Análisis y Clasificación, encargado de identificar requisitos funcionales, para posteriormente ser enriquecida mediante técnicas RAG y utilizada 
+en la construcción automática del documento SRS conforme al estándar IEEE 830-1998. Esta integración permite establecer un flujo de procesamiento 
+organizado y favorece la generación de especificaciones de requisitos con menor intervención manual \cite{Radford2022}, \cite{Wolf2026}.
+
 
 
 \section{Desarrollo de Aplicaciones Web}
+El desarrollo de aplicaciones web ha evolucionado significativamente con la adopción de arquitecturas desacopladas y servicios distribuidos, 
+permitiendo construir sistemas más escalables, mantenibles y adaptables a diferentes entornos de ejecución. Estas aplicaciones suelen estar 
+compuestas por componentes especializados que interactúan a través de interfaces bien definidas, facilitando la integración de tecnologías 
+emergentes como modelos de lenguaje, sistemas multi-agente y servicios de inteligencia artificial \cite{richards2020fundamentals}, \cite{newman2021building}.
+
+En el marco de este estudio, la plataforma web actúa como el canal de comunicación entre el usuario y el sistema multi-agente diseñado, 
+facilitando la carga de grabaciones de entrevistas para la obtención de requisitos, la consulta de los documentos SRS generados y el resguardo 
+de los datos obtenidos. En los apartados siguientes se detallan los fundamentos de las arquitecturas web, las formas de conexión entre el frontend, 
+el backend y los agentes inteligentes, así como las técnicas empleadas para mostrar los resultados y los informes generados.
+
+
+
 \subsection{Arquitectura de aplicaciones web}
+
+Las arquitecturas de aplicaciones web definen la organización de los componentes de software y las interacciones necesarias para proporcionar 
+servicios a los usuarios finales. Tradicionalmente, estas arquitecturas se estructuran en capas diferenciadas, donde el frontend se encarga de 
+la interfaz de usuario, el backend procesa la lógica de negocio y las bases de datos gestionan la persistencia de la información. Esta separación 
+favorece la mantenibilidad, reutilización de componentes y escalabilidad de la aplicación \cite{richards2020fundamentals}, \cite{newman2021building}.
+
+En aplicaciones modernas, es común adoptar arquitecturas basadas en APIs REST, las cuales permiten establecer mecanismos de comunicación independientes 
+de la tecnología utilizada en cada componente. De esta manera, clientes web, servicios de inteligencia artificial y sistemas externos pueden 
+intercambiar información mediante solicitudes HTTP estandarizadas, facilitando la integración de funcionalidades distribuidas. No obstante, 
+esta estructura requiere una gestión rigurosa de la latencia de red y la implementación de controles de seguridad en cada punto de conexión, 
+dado que la superficie de ataque aumenta en comparación con las arquitecturas monolíticas \cite{newman2021building}, \cite{richards2020fundamentals}.
+
+En este trabajo, la aplicación web se desarrolló bajo un esquema arquitectónico de capas múltiples, en el que una interfaz gráfica posibilita 
+la carga de archivos de audio provenientes de entrevistas y la revisión de los documentos SRS producidos. El backend funciona como puente entre 
+el usuario y el sistema multia-gente, encargándose de recibir peticiones, orquestar el flujo de procesamiento de los datos y conservar los resultados 
+generados, de modo que puedan ser recuperados y analizados posteriormente.
+
 \subsection{Integración entre frontend, backend y agentes}
+La integración entre el frontend, el backend y los agentes inteligentes es un aspecto fundamental en aplicaciones basadas en arquitecturas 
+distribuidas, ya que permite coordinar el intercambio de información entre la interfaz de usuario y los componentes encargados del procesamiento 
+de datos. Generalmente, el frontend actúa como punto de interacción con el usuario, mientras que el backend implementa la lógica de negocio, 
+expone servicios mediante APIs REST y gestiona la comunicación con otros módulos especializados \cite{richards2020fundamentals}, \cite{newman2021building}.
+
+En sistemas multi-agente basados en modelos de lenguaje, el backend puede desempeñar el papel de intermediario entre la aplicación web y los 
+agentes inteligentes, recibiendo solicitudes, orquestando la ejecución de tareas y consolidando los resultados obtenidos. Esta estrategia 
+facilita la incorporación de agentes especializados para actividades como transcripción de audio, análisis de información, recuperación de 
+contexto y generación de documentos, manteniendo desacoplados los componentes de presentación y procesamiento \cite{newman2021building}, \cite{Guo2024}.
+
+En este estudio, la plataforma web ofrece al usuario la opción de subir grabaciones de entrevistas de elicitación y acceder a los documentos 
+SRS generados de forma automatizada. Tras recibir el archivo de audio, el backend lo remite al Agente Orquestador, quien se encarga de dirigir 
+la ejecución ordenada de los agentes especializados en transcripción ASR, análisis y categorización, enriquecimiento contextual y redacción del 
+documento SRS. Por último, el informe resultante se guarda en la base de datos y se muestra al usuario en la interfaz web, permitiendo su revisión 
+y comparación en etapas posteriores.
+
+
+
 \subsection{Visualización de resultados y reportes}
+La visualización de resultados constituye un componente esencial en aplicaciones web modernas, ya que permite presentar información procesada 
+de forma clara, organizada y comprensible para los usuarios. Una adecuada representación de los datos facilita la interpretación de los resultados 
+obtenidos, mejora la experiencia de uso del sistema y contribuye a la toma de decisiones informadas. En aplicaciones de apoyo a la Ingeniería de 
+Software, la presentación estructurada de documentos, métricas y reportes favorece además las actividades de revisión, validación y comparación de 
+artefactos generados automáticamente \cite{richards2020fundamentals}, \cite{newman2021building}.
+
+Las aplicaciones web actuales suelen incorporar mecanismos de visualización dinámica que permiten mostrar documentos, tablas, indicadores y 
+reportes generados por procesos automatizados. En sistemas basados en inteligencia artificial, estas interfaces posibilitan que los usuarios 
+inspeccionen los resultados producidos por modelos de aprendizaje automático, realicen validaciones manuales y almacenen información para 
+consultas posteriores. Asimismo, la persistencia de los resultados facilita mantener un historial de ejecuciones y efectuar análisis comparativos 
+entre diferentes versiones o documentos generados \cite{richards2020fundamentals}, \cite{Umar2024}.
+
+En el marco de esta investigación, la interfaz web exhibe el documento SRS producido automáticamente bajo los lineamientos del estándar 
+IEEE 830-1998, ofreciendo al usuario una presentación ordenada de los requisitos funcionales extraídos durante la entrevista de elicitación. 
+Asimismo, el sistema resguarda los informes generados en una base de datos, lo que facilita su recuperación, exportación y confrontación futura 
+con especificaciones realizadas de forma manual, contribuyendo así al proceso de validación del prototipo desarrollado.
